@@ -1,15 +1,23 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 import Icon from 'components/AppIcon';
 
 function LocationPerformance({ locations }) {
   // Format currency for display
-  const formatCurrency = (value) => {
+  const formatCurrency = value => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0
+      maximumFractionDigits: 0,
     }).format(value);
   };
 
@@ -17,7 +25,7 @@ function LocationPerformance({ locations }) {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const location = locations.find(loc => loc.name === label);
-      
+
       return (
         <div className="bg-surface p-3 border border-border rounded-lg shadow-floating">
           <p className="font-body font-body-medium text-text-primary mb-2">
@@ -25,13 +33,18 @@ function LocationPerformance({ locations }) {
           </p>
           <div className="space-y-1 text-sm">
             <p className="font-body">
-              <span className="text-primary font-body-medium">Sales:</span> {formatCurrency(payload[0].value)}
+              <span className="text-primary font-body-medium">Sales:</span>{' '}
+              {formatCurrency(payload[0].value)}
             </p>
             <p className="font-body">
-              <span className="text-primary font-body-medium">Orders:</span> {location.orders}
+              <span className="text-primary font-body-medium">Orders:</span>{' '}
+              {location.orders}
             </p>
             <p className="font-body">
-              <span className="text-primary font-body-medium">Satisfaction:</span> {location.satisfaction}/5
+              <span className="text-primary font-body-medium">
+                Satisfaction:
+              </span>{' '}
+              {location.satisfaction}/5
             </p>
           </div>
         </div>
@@ -43,7 +56,7 @@ function LocationPerformance({ locations }) {
   // Prepare data for chart
   const chartData = locations.map(location => ({
     name: location.name,
-    sales: location.sales
+    sales: location.sales,
   }));
 
   return (
@@ -69,20 +82,20 @@ function LocationPerformance({ locations }) {
             margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-            <XAxis 
-              dataKey="name" 
+            <XAxis
+              dataKey="name"
               stroke="var(--color-text-secondary)"
               tick={{ fontSize: 12 }}
             />
-            <YAxis 
-              tickFormatter={(value) => `$${value/1000}k`}
+            <YAxis
+              tickFormatter={value => `$${value / 1000}k`}
               stroke="var(--color-text-secondary)"
               tick={{ fontSize: 12 }}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Bar 
-              dataKey="sales" 
-              fill="var(--color-primary)" 
+            <Bar
+              dataKey="sales"
+              fill="var(--color-primary)"
               radius={[4, 4, 0, 0]}
             />
           </BarChart>
@@ -94,18 +107,35 @@ function LocationPerformance({ locations }) {
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-border">
-              <th className="pb-2 text-sm font-body font-body-medium text-text-secondary">Location</th>
-              <th className="pb-2 text-sm font-body font-body-medium text-text-secondary text-right">Orders</th>
-              <th className="pb-2 text-sm font-body font-body-medium text-text-secondary text-right">Sales</th>
-              <th className="pb-2 text-sm font-body font-body-medium text-text-secondary text-right">Rating</th>
+              <th className="pb-2 text-sm font-body font-body-medium text-text-secondary">
+                Location
+              </th>
+              <th className="pb-2 text-sm font-body font-body-medium text-text-secondary text-right">
+                Orders
+              </th>
+              <th className="pb-2 text-sm font-body font-body-medium text-text-secondary text-right">
+                Sales
+              </th>
+              <th className="pb-2 text-sm font-body font-body-medium text-text-secondary text-right">
+                Rating
+              </th>
             </tr>
           </thead>
           <tbody>
-            {locations.map((location) => (
-              <tr key={location.id} className="border-b border-border-light hover:bg-secondary-50">
-                <td className="py-3 text-sm font-body text-text-primary">{location.name}</td>
-                <td className="py-3 text-sm font-body text-text-primary text-right">{location.orders}</td>
-                <td className="py-3 text-sm font-body text-text-primary text-right">{formatCurrency(location.sales)}</td>
+            {locations.map(location => (
+              <tr
+                key={location.id}
+                className="border-b border-border-light hover:bg-secondary-50"
+              >
+                <td className="py-3 text-sm font-body text-text-primary">
+                  {location.name}
+                </td>
+                <td className="py-3 text-sm font-body text-text-primary text-right">
+                  {location.orders}
+                </td>
+                <td className="py-3 text-sm font-body text-text-primary text-right">
+                  {formatCurrency(location.sales)}
+                </td>
                 <td className="py-3 text-sm font-body text-text-primary text-right">
                   <div className="flex items-center justify-end">
                     <span className="mr-1">{location.satisfaction}</span>

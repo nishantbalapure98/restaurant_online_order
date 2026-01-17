@@ -13,7 +13,7 @@ function PaymentMethodsSection() {
       expiryYear: '2027',
       holderName: 'John Doe',
       isDefault: true,
-      nickname: 'Personal Visa'
+      nickname: 'Personal Visa',
     },
     {
       id: 2,
@@ -24,16 +24,16 @@ function PaymentMethodsSection() {
       expiryYear: '2026',
       holderName: 'John Doe',
       isDefault: false,
-      nickname: 'Business Card'
+      nickname: 'Business Card',
     },
     {
       id: 3,
       type: 'paypal',
       email: 'john.doe@example.com',
-      isDefault: false
-    }
+      isDefault: false,
+    },
   ]);
-  
+
   const [isAddingCard, setIsAddingCard] = useState(false);
   const [editingCard, setEditingCard] = useState(null);
   const [cardForm, setCardForm] = useState({
@@ -44,7 +44,7 @@ function PaymentMethodsSection() {
     cvv: '',
     holderName: '',
     nickname: '',
-    saveCard: true
+    saveCard: true,
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -52,23 +52,37 @@ function PaymentMethodsSection() {
 
   const cardBrands = {
     visa: { name: 'Visa', icon: 'CreditCard', color: 'text-blue-600' },
-    mastercard: { name: 'Mastercard', icon: 'CreditCard', color: 'text-red-600' },
-    amex: { name: 'American Express', icon: 'CreditCard', color: 'text-green-600' },
-    discover: { name: 'Discover', icon: 'CreditCard', color: 'text-orange-600' }
+    mastercard: {
+      name: 'Mastercard',
+      icon: 'CreditCard',
+      color: 'text-red-600',
+    },
+    amex: {
+      name: 'American Express',
+      icon: 'CreditCard',
+      color: 'text-green-600',
+    },
+    discover: {
+      name: 'Discover',
+      icon: 'CreditCard',
+      color: 'text-orange-600',
+    },
   };
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 20 }, (_, i) => currentYear + i);
-  const months = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'));
+  const months = Array.from({ length: 12 }, (_, i) =>
+    String(i + 1).padStart(2, '0')
+  );
 
-  const detectCardBrand = (number) => {
+  const detectCardBrand = number => {
     const patterns = {
       visa: /^4/,
       mastercard: /^5[1-5]/,
       amex: /^3[47]/,
-      discover: /^6(?:011|5)/
+      discover: /^6(?:011|5)/,
     };
-    
+
     for (const [brand, pattern] of Object.entries(patterns)) {
       if (pattern.test(number)) {
         return brand;
@@ -77,16 +91,16 @@ function PaymentMethodsSection() {
     return 'unknown';
   };
 
-  const formatCardNumber = (value) => {
+  const formatCardNumber = value => {
     const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
     const matches = v.match(/\d{4,16}/g);
-    const match = matches && matches[0] || '';
+    const match = (matches && matches[0]) || '';
     const parts = [];
-    
+
     for (let i = 0, len = match.length; i < len; i += 4) {
       parts.push(match.substring(i, i + 4));
     }
-    
+
     if (parts.length) {
       return parts.join(' ');
     } else {
@@ -94,9 +108,9 @@ function PaymentMethodsSection() {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value, type, checked } = e.target;
-    
+
     let processedValue = value;
     if (name === 'cardNumber') {
       processedValue = formatCardNumber(value);
@@ -105,16 +119,16 @@ function PaymentMethodsSection() {
     } else if (name === 'holderName') {
       processedValue = value.replace(/[^a-zA-Z\s]/g, '');
     }
-    
+
     setCardForm(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : processedValue
+      [name]: type === 'checkbox' ? checked : processedValue,
     }));
 
     if (errors?.[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: ''
+        [name]: '',
       }));
     }
   };
@@ -126,27 +140,30 @@ function PaymentMethodsSection() {
     if (!cardForm?.holderName?.trim()) {
       newErrors.holderName = 'Cardholder name is required';
     }
-    
+
     if (!cardNumber) {
       newErrors.cardNumber = 'Card number is required';
     } else if (cardNumber.length < 13 || cardNumber.length > 19) {
       newErrors.cardNumber = 'Please enter a valid card number';
     }
-    
+
     if (!cardForm?.expiryMonth) {
       newErrors.expiryMonth = 'Expiry month is required';
     }
-    
+
     if (!cardForm?.expiryYear) {
       newErrors.expiryYear = 'Expiry year is required';
     } else {
       const currentDate = new Date();
-      const expiryDate = new Date(parseInt(cardForm?.expiryYear), parseInt(cardForm?.expiryMonth) - 1);
+      const expiryDate = new Date(
+        parseInt(cardForm?.expiryYear),
+        parseInt(cardForm?.expiryMonth) - 1
+      );
       if (expiryDate <= currentDate) {
         newErrors.expiryYear = 'Card has expired';
       }
     }
-    
+
     if (!cardForm?.cvv) {
       newErrors.cvv = 'CVV is required';
     } else if (cardForm?.cvv?.length < 3) {
@@ -166,19 +183,19 @@ function PaymentMethodsSection() {
       cvv: '',
       holderName: '',
       nickname: '',
-      saveCard: true
+      saveCard: true,
     });
     setErrors({});
     setIsAddingCard(true);
   };
 
-  const handleEditCard = (card) => {
+  const handleEditCard = card => {
     if (card?.type === 'credit') {
       setCardForm({
         ...card,
         cardNumber: `•••• •••• •••• ${card?.last4}`,
         cvv: '',
-        saveCard: true
+        saveCard: true,
       });
     }
     setErrors({});
@@ -193,24 +210,26 @@ function PaymentMethodsSection() {
     setIsLoading(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       if (editingCard) {
-        setPaymentMethods(prev => prev?.map(method => 
-          method?.id === editingCard 
-            ? { 
-                ...method, 
-                holderName: cardForm?.holderName,
-                nickname: cardForm?.nickname,
-                expiryMonth: cardForm?.expiryMonth,
-                expiryYear: cardForm?.expiryYear
-              }
-            : method
-        ));
+        setPaymentMethods(prev =>
+          prev?.map(method =>
+            method?.id === editingCard
+              ? {
+                  ...method,
+                  holderName: cardForm?.holderName,
+                  nickname: cardForm?.nickname,
+                  expiryMonth: cardForm?.expiryMonth,
+                  expiryYear: cardForm?.expiryYear,
+                }
+              : method
+          )
+        );
         setEditingCard(null);
       } else {
         const cardNumber = cardForm?.cardNumber?.replace(/\s/g, '');
         const brand = detectCardBrand(cardNumber);
-        
+
         const newCard = {
           id: Date.now(),
           type: cardForm?.type,
@@ -219,14 +238,16 @@ function PaymentMethodsSection() {
           expiryMonth: cardForm?.expiryMonth,
           expiryYear: cardForm?.expiryYear,
           holderName: cardForm?.holderName,
-          nickname: cardForm?.nickname || `${cardBrands[brand]?.name || 'Card'} ending in ${cardNumber?.slice(-4)}`,
-          isDefault: paymentMethods?.length === 0
+          nickname:
+            cardForm?.nickname ||
+            `${cardBrands[brand]?.name || 'Card'} ending in ${cardNumber?.slice(-4)}`,
+          isDefault: paymentMethods?.length === 0,
         };
-        
+
         setPaymentMethods(prev => [...prev, newCard]);
         setIsAddingCard(false);
       }
-      
+
       setCardForm({
         type: 'credit',
         cardNumber: '',
@@ -235,7 +256,7 @@ function PaymentMethodsSection() {
         cvv: '',
         holderName: '',
         nickname: '',
-        saveCard: true
+        saveCard: true,
       });
     } catch (error) {
       console.error('Failed to save payment method:', error);
@@ -255,12 +276,12 @@ function PaymentMethodsSection() {
       cvv: '',
       holderName: '',
       nickname: '',
-      saveCard: true
+      saveCard: true,
     });
     setErrors({});
   };
 
-  const handleDeleteCard = async (cardId) => {
+  const handleDeleteCard = async cardId => {
     if (!confirm('Are you sure you want to remove this payment method?')) {
       return;
     }
@@ -276,14 +297,16 @@ function PaymentMethodsSection() {
     }
   };
 
-  const handleSetDefault = async (cardId) => {
+  const handleSetDefault = async cardId => {
     setIsLoading(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 500));
-      setPaymentMethods(prev => prev?.map(method => ({
-        ...method,
-        isDefault: method?.id === cardId
-      })));
+      setPaymentMethods(prev =>
+        prev?.map(method => ({
+          ...method,
+          isDefault: method?.id === cardId,
+        }))
+      );
     } catch (error) {
       console.error('Failed to set default payment method:', error);
     } finally {
@@ -291,21 +314,21 @@ function PaymentMethodsSection() {
     }
   };
 
-  const getCardIcon = (method) => {
+  const getCardIcon = method => {
     if (method?.type === 'paypal') {
       return 'Wallet';
     }
     return cardBrands[method?.brand]?.icon || 'CreditCard';
   };
 
-  const getCardColor = (method) => {
+  const getCardColor = method => {
     if (method?.type === 'paypal') {
       return 'text-blue-600';
     }
     return cardBrands[method?.brand]?.color || 'text-text-secondary';
   };
 
-  const formatCardDisplay = (method) => {
+  const formatCardDisplay = method => {
     if (method?.type === 'paypal') {
       return method?.email;
     }
@@ -317,14 +340,14 @@ function PaymentMethodsSection() {
     try {
       // Simulate PayPal connection
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       const newPayPal = {
         id: Date.now(),
         type: 'paypal',
         email: 'john.doe@example.com',
-        isDefault: paymentMethods?.length === 0
+        isDefault: paymentMethods?.length === 0,
       };
-      
+
       setPaymentMethods(prev => [...prev, newPayPal]);
     } catch (error) {
       console.error('Failed to connect PayPal:', error);
@@ -353,28 +376,40 @@ function PaymentMethodsSection() {
           <h3 className="text-lg font-heading font-heading-medium text-text-primary mb-4">
             Add Payment Method
           </h3>
-          
+
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={handleAddCard}
               className="flex items-center justify-center space-x-3 px-6 py-4 border-2 border-dashed border-border rounded-lg hover:border-primary hover:bg-primary-50 transition-smooth font-body font-body-medium"
             >
-              <Icon name="CreditCard" size={20} className="text-text-secondary" />
+              <Icon
+                name="CreditCard"
+                size={20}
+                className="text-text-secondary"
+              />
               <span>Add Credit/Debit Card</span>
             </button>
-            
+
             <button
               onClick={handleConnectPayPal}
-              disabled={isLoading || paymentMethods?.some(m => m?.type === 'paypal')}
+              disabled={
+                isLoading || paymentMethods?.some(m => m?.type === 'paypal')
+              }
               className="flex items-center justify-center space-x-3 px-6 py-4 border-2 border-dashed border-border rounded-lg hover:border-primary hover:bg-primary-50 transition-smooth font-body font-body-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
-                <Icon name="Loader2" size={20} className="animate-spin text-text-secondary" />
+                <Icon
+                  name="Loader2"
+                  size={20}
+                  className="animate-spin text-text-secondary"
+                />
               ) : (
                 <Icon name="Wallet" size={20} className="text-text-secondary" />
               )}
               <span>
-                {paymentMethods?.some(m => m?.type === 'paypal') ? 'PayPal Connected' : 'Connect PayPal'}
+                {paymentMethods?.some(m => m?.type === 'paypal')
+                  ? 'PayPal Connected'
+                  : 'Connect PayPal'}
               </span>
             </button>
           </div>
@@ -387,7 +422,7 @@ function PaymentMethodsSection() {
           <h3 className="text-lg font-heading font-heading-medium text-text-primary mb-6">
             {editingCard ? 'Edit Payment Method' : 'Add Credit/Debit Card'}
           </h3>
-          
+
           <div className="space-y-4">
             {/* Cardholder Name */}
             <div>
@@ -405,7 +440,9 @@ function PaymentMethodsSection() {
                 placeholder="John Doe"
               />
               {errors?.holderName && (
-                <p className="text-error text-sm font-body mt-1">{errors?.holderName}</p>
+                <p className="text-error text-sm font-body mt-1">
+                  {errors?.holderName}
+                </p>
               )}
             </div>
 
@@ -428,11 +465,17 @@ function PaymentMethodsSection() {
                   disabled={editingCard}
                 />
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                  <Icon name="CreditCard" size={20} className="text-text-secondary" />
+                  <Icon
+                    name="CreditCard"
+                    size={20}
+                    className="text-text-secondary"
+                  />
                 </div>
               </div>
               {errors?.cardNumber && (
-                <p className="text-error text-sm font-body mt-1">{errors?.cardNumber}</p>
+                <p className="text-error text-sm font-body mt-1">
+                  {errors?.cardNumber}
+                </p>
               )}
             </div>
 
@@ -452,14 +495,18 @@ function PaymentMethodsSection() {
                 >
                   <option value="">Month</option>
                   {months?.map(month => (
-                    <option key={month} value={month}>{month}</option>
+                    <option key={month} value={month}>
+                      {month}
+                    </option>
                   ))}
                 </select>
                 {errors?.expiryMonth && (
-                  <p className="text-error text-sm font-body mt-1">{errors?.expiryMonth}</p>
+                  <p className="text-error text-sm font-body mt-1">
+                    {errors?.expiryMonth}
+                  </p>
                 )}
               </div>
-              
+
               <div>
                 <label className="block text-sm font-body font-body-medium text-text-primary mb-2">
                   Expiry Year *
@@ -474,14 +521,18 @@ function PaymentMethodsSection() {
                 >
                   <option value="">Year</option>
                   {years?.map(year => (
-                    <option key={year} value={year}>{year}</option>
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
                   ))}
                 </select>
                 {errors?.expiryYear && (
-                  <p className="text-error text-sm font-body mt-1">{errors?.expiryYear}</p>
+                  <p className="text-error text-sm font-body mt-1">
+                    {errors?.expiryYear}
+                  </p>
                 )}
               </div>
-              
+
               <div>
                 <label className="block text-sm font-body font-body-medium text-text-primary mb-2">
                   CVV *
@@ -502,11 +553,13 @@ function PaymentMethodsSection() {
                     onClick={() => setShowCvv(!showCvv)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary hover:text-primary transition-smooth"
                   >
-                    <Icon name={showCvv ? "EyeOff" : "Eye"} size={20} />
+                    <Icon name={showCvv ? 'EyeOff' : 'Eye'} size={20} />
                   </button>
                 </div>
                 {errors?.cvv && (
-                  <p className="text-error text-sm font-body mt-1">{errors?.cvv}</p>
+                  <p className="text-error text-sm font-body mt-1">
+                    {errors?.cvv}
+                  </p>
                 )}
               </div>
             </div>
@@ -529,13 +582,19 @@ function PaymentMethodsSection() {
             {/* Security Notice */}
             <div className="p-4 bg-success-50 border border-success-100 rounded-lg">
               <div className="flex items-start space-x-3">
-                <Icon name="Shield" size={20} className="text-success-600 mt-0.5" />
+                <Icon
+                  name="Shield"
+                  size={20}
+                  className="text-success-600 mt-0.5"
+                />
                 <div>
                   <p className="text-sm font-body font-body-medium text-success-800">
                     Your payment information is secure
                   </p>
                   <p className="text-xs text-success-700 font-body mt-1">
-                    We use industry-standard encryption to protect your payment details. Your card information is tokenized and never stored in plain text.
+                    We use industry-standard encryption to protect your payment
+                    details. Your card information is tokenized and never stored
+                    in plain text.
                   </p>
                 </div>
               </div>
@@ -548,10 +607,18 @@ function PaymentMethodsSection() {
                 disabled={isLoading}
                 className="flex items-center space-x-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-smooth font-body font-body-medium"
               >
-                {isLoading && <Icon name="Loader2" size={18} className="animate-spin" />}
-                <span>{isLoading ? 'Saving...' : (editingCard ? 'Update Card' : 'Add Card')}</span>
+                {isLoading && (
+                  <Icon name="Loader2" size={18} className="animate-spin" />
+                )}
+                <span>
+                  {isLoading
+                    ? 'Saving...'
+                    : editingCard
+                      ? 'Update Card'
+                      : 'Add Card'}
+                </span>
               </button>
-              
+
               <button
                 onClick={handleCancelEdit}
                 className="px-6 py-3 border border-border text-text-secondary rounded-lg hover:bg-secondary-50 transition-smooth font-body font-body-medium"
@@ -587,23 +654,31 @@ function PaymentMethodsSection() {
           <h3 className="text-lg font-heading font-heading-medium text-text-primary">
             Saved Payment Methods
           </h3>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {paymentMethods?.map((method) => (
-              <div key={method?.id} className={`bg-surface rounded-lg shadow-soft p-6 border-2 transition-smooth ${
-                method?.isDefault ? 'border-primary' : 'border-border'
-              }`}>
+            {paymentMethods?.map(method => (
+              <div
+                key={method?.id}
+                className={`bg-surface rounded-lg shadow-soft p-6 border-2 transition-smooth ${
+                  method?.isDefault ? 'border-primary' : 'border-border'
+                }`}
+              >
                 {/* Card Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-secondary-100 rounded-lg flex items-center justify-center">
-                      <Icon name={getCardIcon(method)} size={20} className={getCardColor(method)} />
+                      <Icon
+                        name={getCardIcon(method)}
+                        size={20}
+                        className={getCardColor(method)}
+                      />
                     </div>
-                    
+
                     <div>
                       <div className="flex items-center space-x-2">
                         <h4 className="font-heading font-heading-medium text-text-primary">
-                          {method?.nickname || `${method?.type === 'paypal' ? 'PayPal' : cardBrands[method?.brand]?.name || 'Card'}`}
+                          {method?.nickname ||
+                            `${method?.type === 'paypal' ? 'PayPal' : cardBrands[method?.brand]?.name || 'Card'}`}
                         </h4>
                         {method?.isDefault && (
                           <span className="px-2 py-1 bg-primary text-white text-xs font-body font-body-medium rounded-full">
@@ -621,7 +696,7 @@ function PaymentMethodsSection() {
                       )}
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center space-x-2">
                     {method?.type === 'credit' && (
                       <button
@@ -632,7 +707,7 @@ function PaymentMethodsSection() {
                         <Icon name="Edit" size={18} />
                       </button>
                     )}
-                    
+
                     <button
                       onClick={() => handleDeleteCard(method?.id)}
                       disabled={isLoading || editingCard || isAddingCard}

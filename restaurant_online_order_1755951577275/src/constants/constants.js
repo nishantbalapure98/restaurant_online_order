@@ -1,3 +1,19 @@
+/* ===========================
+   Categories
+=========================== */
+export const categories = [
+  { id: 'all', name: 'All Items', icon: 'Grid3X3' },
+  { id: 'appetizers', name: 'Appetizers', icon: 'Utensils' },
+  { id: 'mains', name: 'Main Course', icon: 'ChefHat' },
+  { id: 'desserts', name: 'Desserts', icon: 'Cake' },
+  { id: 'beverages', name: 'Beverages', icon: 'Coffee' },
+  { id: 'salads', name: 'Salads', icon: 'Leaf' },
+  { id: 'soups', name: 'Soups', icon: 'Bowl' },
+];
+
+/* ===========================
+   Menu Items (Mock Data)
+=========================== */
 export const menuItems = [
   {
     id: 1,
@@ -144,4 +160,41 @@ export const menuItems = [
     rating: 4.6,
     reviewCount: 134,
   },
+  // ...
 ];
+
+/* ===========================
+   Filters
+=========================== */
+export const defaultFilters = {
+  dietary: [],
+  priceRange: [0, 50],
+  prepTime: 60,
+  allergens: [],
+};
+
+export const dietaryOptions = [
+  'vegetarian',
+  'vegan',
+  'gluten-free',
+  'protein-rich',
+];
+
+export const allergens = ['gluten', 'dairy', 'eggs', 'nuts'];
+
+/* ===========================
+   UI Maps
+=========================== */
+export const dietryIconMap = {
+  vegetarian: 'Leaf',
+  vegan: 'Sprout',
+  'gluten-free': 'Wheat',
+  'protein-rich': 'Zap',
+};
+
+export const spiceLevelColourMap = {
+  0: 'text-secondary-400',
+  1: 'text-warning-400',
+  2: 'text-accent-500',
+  3: 'text-error-500',
+};

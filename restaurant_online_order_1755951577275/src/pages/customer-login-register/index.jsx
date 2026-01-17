@@ -13,7 +13,7 @@ function CustomerLoginRegister() {
     firstName: '',
     lastName: '',
     rememberMe: false,
-    acceptTerms: false
+    acceptTerms: false,
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -25,9 +25,9 @@ function CustomerLoginRegister() {
 
   // Mock credentials for testing
   const mockCredentials = {
-    customer: { email: "customer@tastebite.com", password: "customer123" },
-    admin: { email: "admin@tastebite.com", password: "admin123" },
-    staff: { email: "staff@tastebite.com", password: "staff123" }
+    customer: { email: 'customer@tastebite.com', password: 'customer123' },
+    admin: { email: 'admin@tastebite.com', password: 'admin123' },
+    staff: { email: 'staff@tastebite.com', password: 'staff123' },
   };
 
   useEffect(() => {
@@ -40,26 +40,26 @@ function CustomerLoginRegister() {
       firstName: '',
       lastName: '',
       rememberMe: false,
-      acceptTerms: false
+      acceptTerms: false,
     });
     setErrors({});
     setPasswordStrength(0);
   }, [activeTab]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value, type, checked } = e.target;
     const inputValue = type === 'checkbox' ? checked : value;
-    
+
     setFormData(prev => ({
       ...prev,
-      [name]: inputValue
+      [name]: inputValue,
     }));
 
     // Clear specific error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: ''
+        [name]: '',
       }));
     }
 
@@ -69,7 +69,7 @@ function CustomerLoginRegister() {
     }
   };
 
-  const calculatePasswordStrength = (password) => {
+  const calculatePasswordStrength = password => {
     let strength = 0;
     if (password.length >= 8) strength += 25;
     if (/[A-Z]/.test(password)) strength += 25;
@@ -128,9 +128,9 @@ function CustomerLoginRegister() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -144,12 +144,13 @@ function CustomerLoginRegister() {
       if (activeTab === 'login') {
         // Check mock credentials
         const isValidCredentials = Object.values(mockCredentials).some(
-          cred => cred.email === formData.email && cred.password === formData.password
+          cred =>
+            cred.email === formData.email && cred.password === formData.password
         );
 
         if (!isValidCredentials) {
-          setErrors({ 
-            submit: `Invalid credentials. Try: ${mockCredentials.customer.email} / ${mockCredentials.customer.password}` 
+          setErrors({
+            submit: `Invalid credentials. Try: ${mockCredentials.customer.email} / ${mockCredentials.customer.password}`,
           });
           setIsLoading(false);
           return;
@@ -166,7 +167,7 @@ function CustomerLoginRegister() {
     }
   };
 
-  const handleSocialLogin = (provider) => {
+  const handleSocialLogin = provider => {
     console.log(`${provider} login initiated`);
     // Simulate social login success
     setTimeout(() => {
@@ -189,7 +190,10 @@ function CustomerLoginRegister() {
       <header className="bg-surface shadow-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link to="/menu-browse-search" className="flex items-center space-x-2">
+            <Link
+              to="/menu-browse-search"
+              className="flex items-center space-x-2"
+            >
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <Icon name="ChefHat" size={20} color="white" />
               </div>
@@ -197,7 +201,7 @@ function CustomerLoginRegister() {
                 TasteBite
               </span>
             </Link>
-            
+
             <div className="flex items-center space-x-4">
               <button className="flex items-center space-x-2 px-3 py-2 text-text-secondary hover:text-primary transition-smooth">
                 <Icon name="Globe" size={18} />
@@ -228,15 +232,21 @@ function CustomerLoginRegister() {
               </p>
               <div className="flex items-center justify-center space-x-8">
                 <div className="text-center">
-                  <div className="text-2xl font-heading font-heading-medium">500+</div>
+                  <div className="text-2xl font-heading font-heading-medium">
+                    500+
+                  </div>
                   <div className="text-sm opacity-80">Menu Items</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-heading font-heading-medium">50K+</div>
+                  <div className="text-2xl font-heading font-heading-medium">
+                    50K+
+                  </div>
                   <div className="text-sm opacity-80">Happy Customers</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-heading font-heading-medium">4.8★</div>
+                  <div className="text-2xl font-heading font-heading-medium">
+                    4.8★
+                  </div>
                   <div className="text-sm opacity-80">Average Rating</div>
                 </div>
               </div>
@@ -265,7 +275,9 @@ function CustomerLoginRegister() {
               <button
                 onClick={() => setActiveTab('login')}
                 className={`flex-1 py-3 px-4 rounded-md font-body font-body-medium transition-smooth ${
-                  activeTab === 'login' ?'bg-surface text-primary shadow-soft' :'text-text-secondary hover:text-primary'
+                  activeTab === 'login'
+                    ? 'bg-surface text-primary shadow-soft'
+                    : 'text-text-secondary hover:text-primary'
                 }`}
               >
                 Sign In
@@ -273,7 +285,9 @@ function CustomerLoginRegister() {
               <button
                 onClick={() => setActiveTab('register')}
                 className={`flex-1 py-3 px-4 rounded-md font-body font-body-medium transition-smooth ${
-                  activeTab === 'register' ?'bg-surface text-primary shadow-soft' :'text-text-secondary hover:text-primary'
+                  activeTab === 'register'
+                    ? 'bg-surface text-primary shadow-soft'
+                    : 'text-text-secondary hover:text-primary'
                 }`}
               >
                 Sign Up
@@ -293,7 +307,11 @@ function CustomerLoginRegister() {
                 onClick={() => handleSocialLogin('facebook')}
                 className="w-full flex items-center justify-center space-x-3 px-4 py-3 border border-border rounded-lg hover:bg-secondary-50 transition-smooth font-body font-body-medium min-h-touch"
               >
-                <Icon name="Facebook" size={20} className="text-text-secondary" />
+                <Icon
+                  name="Facebook"
+                  size={20}
+                  className="text-text-secondary"
+                />
                 <span>Continue with Facebook</span>
               </button>
             </div>
@@ -329,7 +347,9 @@ function CustomerLoginRegister() {
                       placeholder="John"
                     />
                     {errors.firstName && (
-                      <p className="text-error text-sm font-body mt-1">{errors.firstName}</p>
+                      <p className="text-error text-sm font-body mt-1">
+                        {errors.firstName}
+                      </p>
                     )}
                   </div>
                   <div>
@@ -347,7 +367,9 @@ function CustomerLoginRegister() {
                       placeholder="Doe"
                     />
                     {errors.lastName && (
-                      <p className="text-error text-sm font-body mt-1">{errors.lastName}</p>
+                      <p className="text-error text-sm font-body mt-1">
+                        {errors.lastName}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -368,7 +390,9 @@ function CustomerLoginRegister() {
                   placeholder="john@example.com"
                 />
                 {errors.email && (
-                  <p className="text-error text-sm font-body mt-1">{errors.email}</p>
+                  <p className="text-error text-sm font-body mt-1">
+                    {errors.email}
+                  </p>
                 )}
               </div>
 
@@ -408,13 +432,15 @@ function CustomerLoginRegister() {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary hover:text-primary transition-smooth"
                   >
-                    <Icon name={showPassword ? "EyeOff" : "Eye"} size={20} />
+                    <Icon name={showPassword ? 'EyeOff' : 'Eye'} size={20} />
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-error text-sm font-body mt-1">{errors.password}</p>
+                  <p className="text-error text-sm font-body mt-1">
+                    {errors.password}
+                  </p>
                 )}
-                
+
                 {activeTab === 'register' && formData.password && (
                   <div className="mt-2">
                     <div className="flex items-center space-x-2 mb-1">
@@ -444,20 +470,29 @@ function CustomerLoginRegister() {
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
                       className={`w-full px-3 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth font-body min-h-touch ${
-                        errors.confirmPassword ? 'border-error' : 'border-border'
+                        errors.confirmPassword
+                          ? 'border-error'
+                          : 'border-border'
                       }`}
                       placeholder="••••••••"
                     />
                     <button
                       type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary hover:text-primary transition-smooth"
                     >
-                      <Icon name={showConfirmPassword ? "EyeOff" : "Eye"} size={20} />
+                      <Icon
+                        name={showConfirmPassword ? 'EyeOff' : 'Eye'}
+                        size={20}
+                      />
                     </button>
                   </div>
                   {errors.confirmPassword && (
-                    <p className="text-error text-sm font-body mt-1">{errors.confirmPassword}</p>
+                    <p className="text-error text-sm font-body mt-1">
+                      {errors.confirmPassword}
+                    </p>
                   )}
                 </div>
               )}
@@ -490,11 +525,17 @@ function CustomerLoginRegister() {
                     />
                     <span className="text-sm font-body text-text-secondary">
                       I agree to the{' '}
-                      <button type="button" className="text-primary hover:text-primary-700 font-body-medium">
+                      <button
+                        type="button"
+                        className="text-primary hover:text-primary-700 font-body-medium"
+                      >
                         Terms of Service
-                      </button>
-                      {' '}and{' '}
-                      <button type="button" className="text-primary hover:text-primary-700 font-body-medium">
+                      </button>{' '}
+                      and{' '}
+                      <button
+                        type="button"
+                        className="text-primary hover:text-primary-700 font-body-medium"
+                      >
                         Privacy Policy
                       </button>
                     </span>
@@ -503,12 +544,16 @@ function CustomerLoginRegister() {
               </div>
 
               {errors.acceptTerms && (
-                <p className="text-error text-sm font-body">{errors.acceptTerms}</p>
+                <p className="text-error text-sm font-body">
+                  {errors.acceptTerms}
+                </p>
               )}
 
               {errors.submit && (
                 <div className="p-3 bg-error-50 border border-error-100 rounded-lg">
-                  <p className="text-error text-sm font-body">{errors.submit}</p>
+                  <p className="text-error text-sm font-body">
+                    {errors.submit}
+                  </p>
                 </div>
               )}
 
@@ -518,12 +563,15 @@ function CustomerLoginRegister() {
                 disabled={isLoading}
                 className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-smooth font-body font-body-medium min-h-touch"
               >
-                {isLoading && <Icon name="Loader2" size={20} className="animate-spin" />}
+                {isLoading && (
+                  <Icon name="Loader2" size={20} className="animate-spin" />
+                )}
                 <span>
-                  {isLoading 
-                    ? 'Please wait...' 
-                    : activeTab === 'login' ?'Sign In' :'Create Account'
-                  }
+                  {isLoading
+                    ? 'Please wait...'
+                    : activeTab === 'login'
+                      ? 'Sign In'
+                      : 'Create Account'}
                 </span>
               </button>
             </form>
@@ -559,9 +607,18 @@ function CustomerLoginRegister() {
                 Demo Credentials:
               </h4>
               <div className="text-xs font-data space-y-1 text-text-secondary">
-                <div>Customer: {mockCredentials.customer.email} / {mockCredentials.customer.password}</div>
-                <div>Admin: {mockCredentials.admin.email} / {mockCredentials.admin.password}</div>
-                <div>Staff: {mockCredentials.staff.email} / {mockCredentials.staff.password}</div>
+                <div>
+                  Customer: {mockCredentials.customer.email} /{' '}
+                  {mockCredentials.customer.password}
+                </div>
+                <div>
+                  Admin: {mockCredentials.admin.email} /{' '}
+                  {mockCredentials.admin.password}
+                </div>
+                <div>
+                  Staff: {mockCredentials.staff.email} /{' '}
+                  {mockCredentials.staff.password}
+                </div>
               </div>
             </div>
           </div>

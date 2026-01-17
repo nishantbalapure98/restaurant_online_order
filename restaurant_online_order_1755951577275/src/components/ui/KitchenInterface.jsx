@@ -14,12 +14,12 @@ function KitchenInterface() {
     return () => clearInterval(timer);
   }, []);
 
-  const formatTime = (date) => {
+  const formatTime = date => {
     return date.toLocaleTimeString('en-US', {
       hour12: false,
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit'
+      second: '2-digit',
     });
   };
 
@@ -83,12 +83,14 @@ function KitchenInterface() {
 
             {/* Connection Status */}
             <div className="flex items-center space-x-2">
-              <Icon 
-                name={getStatusIcon()} 
-                size={20} 
+              <Icon
+                name={getStatusIcon()}
+                size={20}
                 className={`${getStatusColor()} ${connectionStatus === 'reconnecting' ? 'animate-spin' : ''}`}
               />
-              <span className={`text-sm font-body font-body-medium capitalize ${getStatusColor()}`}>
+              <span
+                className={`text-sm font-body font-body-medium capitalize ${getStatusColor()}`}
+              >
                 {connectionStatus}
               </span>
             </div>

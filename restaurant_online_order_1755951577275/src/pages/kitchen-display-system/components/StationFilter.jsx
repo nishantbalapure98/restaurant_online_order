@@ -2,13 +2,43 @@
 import React from 'react';
 import Icon from 'components/AppIcon';
 
-function StationFilter({ selectedStation, onStationChange, orderCounts, className = '' }) {
+function StationFilter({
+  selectedStation,
+  onStationChange,
+  orderCounts,
+  className = '',
+}) {
   const stations = [
-    { id: 'all', name: 'All Stations', icon: 'Grid3X3', count: orderCounts?.all || 0 },
-    { id: 'grill', name: 'Grill', icon: 'Flame', count: orderCounts?.grill || 0 },
-    { id: 'fryer', name: 'Fryer', icon: 'ChefHat', count: orderCounts?.fryer || 0 },
-    { id: 'salad', name: 'Salad', icon: 'Salad', count: orderCounts?.salad || 0 },
-    { id: 'beverages', name: 'Beverages', icon: 'Coffee', count: orderCounts?.beverages || 0 }
+    {
+      id: 'all',
+      name: 'All Stations',
+      icon: 'Grid3X3',
+      count: orderCounts?.all || 0,
+    },
+    {
+      id: 'grill',
+      name: 'Grill',
+      icon: 'Flame',
+      count: orderCounts?.grill || 0,
+    },
+    {
+      id: 'fryer',
+      name: 'Fryer',
+      icon: 'ChefHat',
+      count: orderCounts?.fryer || 0,
+    },
+    {
+      id: 'salad',
+      name: 'Salad',
+      icon: 'Salad',
+      count: orderCounts?.salad || 0,
+    },
+    {
+      id: 'beverages',
+      name: 'Beverages',
+      icon: 'Coffee',
+      count: orderCounts?.beverages || 0,
+    },
   ];
 
   return (
@@ -22,9 +52,9 @@ function StationFilter({ selectedStation, onStationChange, orderCounts, classNam
             Filter by preparation area
           </div>
         </div>
-        
+
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {stations?.map((station) => (
+          {stations?.map(station => (
             <button
               key={station?.id}
               onClick={() => onStationChange?.(station?.id)}
@@ -34,31 +64,41 @@ function StationFilter({ selectedStation, onStationChange, orderCounts, classNam
                   : 'bg-surface text-text-secondary border-border hover:border-primary hover:text-primary'
               }`}
             >
-              <Icon 
-                name={station?.icon} 
-                size={24} 
+              <Icon
+                name={station?.icon}
+                size={24}
                 className={`mb-2 ${
-                  selectedStation === station?.id ? 'text-white' : 'text-current'
+                  selectedStation === station?.id
+                    ? 'text-white'
+                    : 'text-current'
                 }`}
               />
-              
-              <span className={`text-sm font-body font-body-medium mb-1 ${
-                selectedStation === station?.id ? 'text-white' : 'text-text-primary'
-              }`}>
+
+              <span
+                className={`text-sm font-body font-body-medium mb-1 ${
+                  selectedStation === station?.id
+                    ? 'text-white'
+                    : 'text-text-primary'
+                }`}
+              >
                 {station?.name}
               </span>
-              
-              <div className={`text-xs font-data font-data-normal ${
-                selectedStation === station?.id ? 'text-white' : 'text-text-secondary'
-              }`}>
+
+              <div
+                className={`text-xs font-data font-data-normal ${
+                  selectedStation === station?.id
+                    ? 'text-white'
+                    : 'text-text-secondary'
+                }`}
+              >
                 {station?.count} orders
               </div>
-              
+
               {/* Active indicator */}
               {selectedStation === station?.id && (
                 <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full" />
               )}
-              
+
               {/* Order count badge */}
               {station?.count > 0 && selectedStation !== station?.id && (
                 <div className="absolute -top-2 -right-2 bg-primary text-white text-xs font-data font-data-normal min-w-6 h-6 rounded-full flex items-center justify-center">
@@ -68,7 +108,7 @@ function StationFilter({ selectedStation, onStationChange, orderCounts, classNam
             </button>
           ))}
         </div>
-        
+
         {/* Quick Stats */}
         <div className="mt-4 pt-4 border-t border-border">
           <div className="grid grid-cols-4 gap-4">
@@ -80,7 +120,7 @@ function StationFilter({ selectedStation, onStationChange, orderCounts, classNam
                 Total Orders
               </div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-lg font-data font-data-normal text-warning">
                 {Math.floor((orderCounts?.all || 0) * 0.3)}
@@ -89,16 +129,14 @@ function StationFilter({ selectedStation, onStationChange, orderCounts, classNam
                 In Progress
               </div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-lg font-data font-data-normal text-primary">
                 {Math.floor((orderCounts?.all || 0) * 0.2)}
               </div>
-              <div className="text-xs text-text-secondary font-body">
-                Ready
-              </div>
+              <div className="text-xs text-text-secondary font-body">Ready</div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-lg font-data font-data-normal text-success">
                 {Math.floor((orderCounts?.all || 0) * 0.5)}

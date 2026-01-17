@@ -15,7 +15,7 @@ function AddressesSection() {
       zipCode: '10001',
       country: 'United States',
       isDefault: true,
-      deliveryInstructions: 'Leave at door, ring bell twice'
+      deliveryInstructions: 'Leave at door, ring bell twice',
     },
     {
       id: 2,
@@ -28,10 +28,10 @@ function AddressesSection() {
       zipCode: '10002',
       country: 'United States',
       isDefault: false,
-      deliveryInstructions: 'Call when arriving, security at front desk'
-    }
+      deliveryInstructions: 'Call when arriving, security at front desk',
+    },
   ]);
-  
+
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [editingAddress, setEditingAddress] = useState(null);
   const [addressForm, setAddressForm] = useState({
@@ -43,7 +43,7 @@ function AddressesSection() {
     state: '',
     zipCode: '',
     country: 'United States',
-    deliveryInstructions: ''
+    deliveryInstructions: '',
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -51,28 +51,73 @@ function AddressesSection() {
   const addressTypes = [
     { value: 'home', label: 'Home', icon: 'Home' },
     { value: 'work', label: 'Work', icon: 'Building' },
-    { value: 'other', label: 'Other', icon: 'MapPin' }
+    { value: 'other', label: 'Other', icon: 'MapPin' },
   ];
 
   const states = [
-    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
-    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
-    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
-    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
-    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+    'AL',
+    'AK',
+    'AZ',
+    'AR',
+    'CA',
+    'CO',
+    'CT',
+    'DE',
+    'FL',
+    'GA',
+    'HI',
+    'ID',
+    'IL',
+    'IN',
+    'IA',
+    'KS',
+    'KY',
+    'LA',
+    'ME',
+    'MD',
+    'MA',
+    'MI',
+    'MN',
+    'MS',
+    'MO',
+    'MT',
+    'NE',
+    'NV',
+    'NH',
+    'NJ',
+    'NM',
+    'NY',
+    'NC',
+    'ND',
+    'OH',
+    'OK',
+    'OR',
+    'PA',
+    'RI',
+    'SC',
+    'SD',
+    'TN',
+    'TX',
+    'UT',
+    'VT',
+    'VA',
+    'WA',
+    'WV',
+    'WI',
+    'WY',
   ];
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setAddressForm(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
 
     if (errors?.[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: ''
+        [name]: '',
       }));
     }
   };
@@ -112,13 +157,13 @@ function AddressesSection() {
       state: '',
       zipCode: '',
       country: 'United States',
-      deliveryInstructions: ''
+      deliveryInstructions: '',
     });
     setErrors({});
     setIsAddingAddress(true);
   };
 
-  const handleEditAddress = (address) => {
+  const handleEditAddress = address => {
     setAddressForm(address);
     setErrors({});
     setEditingAddress(address?.id);
@@ -132,24 +177,26 @@ function AddressesSection() {
     setIsLoading(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       if (editingAddress) {
-        setAddresses(prev => prev?.map(addr => 
-          addr?.id === editingAddress 
-            ? { ...addressForm, id: editingAddress }
-            : addr
-        ));
+        setAddresses(prev =>
+          prev?.map(addr =>
+            addr?.id === editingAddress
+              ? { ...addressForm, id: editingAddress }
+              : addr
+          )
+        );
         setEditingAddress(null);
       } else {
         const newAddress = {
           ...addressForm,
           id: Date.now(),
-          isDefault: addresses?.length === 0
+          isDefault: addresses?.length === 0,
         };
         setAddresses(prev => [...prev, newAddress]);
         setIsAddingAddress(false);
       }
-      
+
       setAddressForm({
         type: 'home',
         label: '',
@@ -159,7 +206,7 @@ function AddressesSection() {
         state: '',
         zipCode: '',
         country: 'United States',
-        deliveryInstructions: ''
+        deliveryInstructions: '',
       });
     } catch (error) {
       console.error('Failed to save address:', error);
@@ -180,12 +227,12 @@ function AddressesSection() {
       state: '',
       zipCode: '',
       country: 'United States',
-      deliveryInstructions: ''
+      deliveryInstructions: '',
     });
     setErrors({});
   };
 
-  const handleDeleteAddress = async (addressId) => {
+  const handleDeleteAddress = async addressId => {
     if (!confirm('Are you sure you want to delete this address?')) {
       return;
     }
@@ -201,14 +248,16 @@ function AddressesSection() {
     }
   };
 
-  const handleSetDefault = async (addressId) => {
+  const handleSetDefault = async addressId => {
     setIsLoading(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 500));
-      setAddresses(prev => prev?.map(addr => ({
-        ...addr,
-        isDefault: addr?.id === addressId
-      })));
+      setAddresses(prev =>
+        prev?.map(addr => ({
+          ...addr,
+          isDefault: addr?.id === addressId,
+        }))
+      );
     } catch (error) {
       console.error('Failed to set default address:', error);
     } finally {
@@ -216,12 +265,12 @@ function AddressesSection() {
     }
   };
 
-  const getAddressTypeIcon = (type) => {
+  const getAddressTypeIcon = type => {
     const typeInfo = addressTypes?.find(t => t?.value === type);
     return typeInfo?.icon || 'MapPin';
   };
 
-  const formatAddress = (address) => {
+  const formatAddress = address => {
     const parts = [address?.street];
     if (address?.apartment) parts.push(address?.apartment);
     parts.push(`${address?.city}, ${address?.state} ${address?.zipCode}`);
@@ -240,7 +289,7 @@ function AddressesSection() {
             Manage your saved delivery addresses for quick checkout
           </p>
         </div>
-        
+
         {!isAddingAddress && !editingAddress && (
           <button
             onClick={handleAddAddress}
@@ -258,7 +307,7 @@ function AddressesSection() {
           <h3 className="text-lg font-heading font-heading-medium text-text-primary mb-6">
             {editingAddress ? 'Edit Address' : 'Add New Address'}
           </h3>
-          
+
           <div className="space-y-4">
             {/* Address Type */}
             <div>
@@ -271,7 +320,8 @@ function AddressesSection() {
                     key={type?.value}
                     className={`flex items-center justify-center space-x-2 p-3 border rounded-lg cursor-pointer transition-smooth ${
                       addressForm?.type === type?.value
-                        ? 'border-primary bg-primary-50 text-primary' :'border-border hover:bg-secondary-50'
+                        ? 'border-primary bg-primary-50 text-primary'
+                        : 'border-border hover:bg-secondary-50'
                     }`}
                   >
                     <input
@@ -283,7 +333,9 @@ function AddressesSection() {
                       className="sr-only"
                     />
                     <Icon name={type?.icon} size={18} />
-                    <span className="font-body font-body-medium">{type?.label}</span>
+                    <span className="font-body font-body-medium">
+                      {type?.label}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -305,7 +357,9 @@ function AddressesSection() {
                 placeholder="e.g., Home, Office, Mom's House"
               />
               {errors?.label && (
-                <p className="text-error text-sm font-body mt-1">{errors?.label}</p>
+                <p className="text-error text-sm font-body mt-1">
+                  {errors?.label}
+                </p>
               )}
             </div>
 
@@ -325,7 +379,9 @@ function AddressesSection() {
                 placeholder="123 Main Street"
               />
               {errors?.street && (
-                <p className="text-error text-sm font-body mt-1">{errors?.street}</p>
+                <p className="text-error text-sm font-body mt-1">
+                  {errors?.street}
+                </p>
               )}
             </div>
 
@@ -361,10 +417,12 @@ function AddressesSection() {
                   placeholder="New York"
                 />
                 {errors?.city && (
-                  <p className="text-error text-sm font-body mt-1">{errors?.city}</p>
+                  <p className="text-error text-sm font-body mt-1">
+                    {errors?.city}
+                  </p>
                 )}
               </div>
-              
+
               <div>
                 <label className="block text-sm font-body font-body-medium text-text-primary mb-2">
                   State *
@@ -379,14 +437,18 @@ function AddressesSection() {
                 >
                   <option value="">Select State</option>
                   {states?.map(state => (
-                    <option key={state} value={state}>{state}</option>
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
                   ))}
                 </select>
                 {errors?.state && (
-                  <p className="text-error text-sm font-body mt-1">{errors?.state}</p>
+                  <p className="text-error text-sm font-body mt-1">
+                    {errors?.state}
+                  </p>
                 )}
               </div>
-              
+
               <div>
                 <label className="block text-sm font-body font-body-medium text-text-primary mb-2">
                   ZIP Code *
@@ -402,7 +464,9 @@ function AddressesSection() {
                   placeholder="10001"
                 />
                 {errors?.zipCode && (
-                  <p className="text-error text-sm font-body mt-1">{errors?.zipCode}</p>
+                  <p className="text-error text-sm font-body mt-1">
+                    {errors?.zipCode}
+                  </p>
                 )}
               </div>
             </div>
@@ -429,10 +493,18 @@ function AddressesSection() {
                 disabled={isLoading}
                 className="flex items-center space-x-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-smooth font-body font-body-medium"
               >
-                {isLoading && <Icon name="Loader2" size={18} className="animate-spin" />}
-                <span>{isLoading ? 'Saving...' : (editingAddress ? 'Update Address' : 'Save Address')}</span>
+                {isLoading && (
+                  <Icon name="Loader2" size={18} className="animate-spin" />
+                )}
+                <span>
+                  {isLoading
+                    ? 'Saving...'
+                    : editingAddress
+                      ? 'Update Address'
+                      : 'Save Address'}
+                </span>
               </button>
-              
+
               <button
                 onClick={handleCancelEdit}
                 className="px-6 py-3 border border-border text-text-secondary rounded-lg hover:bg-secondary-50 transition-smooth font-body font-body-medium"
@@ -465,17 +537,24 @@ function AddressesSection() {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {addresses?.map((address) => (
-            <div key={address?.id} className={`bg-surface rounded-lg shadow-soft p-6 border-2 transition-smooth ${
-              address?.isDefault ? 'border-primary' : 'border-border'
-            }`}>
+          {addresses?.map(address => (
+            <div
+              key={address?.id}
+              className={`bg-surface rounded-lg shadow-soft p-6 border-2 transition-smooth ${
+                address?.isDefault ? 'border-primary' : 'border-border'
+              }`}
+            >
               {/* Address Header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <Icon name={getAddressTypeIcon(address?.type)} size={20} className="text-primary" />
+                    <Icon
+                      name={getAddressTypeIcon(address?.type)}
+                      size={20}
+                      className="text-primary"
+                    />
                   </div>
-                  
+
                   <div>
                     <div className="flex items-center space-x-2">
                       <h3 className="font-heading font-heading-medium text-text-primary">
@@ -487,10 +566,12 @@ function AddressesSection() {
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-text-secondary font-body capitalize">{address?.type}</p>
+                    <p className="text-sm text-text-secondary font-body capitalize">
+                      {address?.type}
+                    </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => handleEditAddress(address)}
@@ -499,7 +580,7 @@ function AddressesSection() {
                   >
                     <Icon name="Edit" size={18} />
                   </button>
-                  
+
                   <button
                     onClick={() => handleDeleteAddress(address?.id)}
                     disabled={isLoading || editingAddress || isAddingAddress}
@@ -515,11 +596,14 @@ function AddressesSection() {
                 <p className="font-body text-text-primary">
                   {formatAddress(address)}
                 </p>
-                
+
                 {address?.deliveryInstructions && (
                   <div className="p-3 bg-secondary-50 rounded-lg">
                     <p className="text-sm text-text-secondary font-body">
-                      <span className="font-body-medium">Delivery Instructions:</span> {address?.deliveryInstructions}
+                      <span className="font-body-medium">
+                        Delivery Instructions:
+                      </span>{' '}
+                      {address?.deliveryInstructions}
                     </p>
                   </div>
                 )}

@@ -9,8 +9,8 @@ function TopSellingItems({ items }) {
         <h2 className="text-xl font-heading font-heading-medium text-text-primary">
           Top Selling Items
         </h2>
-        <Link 
-          to="/admin-menu" 
+        <Link
+          to="/admin-menu"
           className="text-sm text-primary hover:text-primary-700 font-body font-body-medium flex items-center"
         >
           <span>View All</span>
@@ -19,19 +19,19 @@ function TopSellingItems({ items }) {
       </div>
 
       <div className="space-y-4">
-        {items.map((item) => (
-          <div 
-            key={item.id} 
+        {items.map(item => (
+          <div
+            key={item.id}
             className="flex items-center p-3 rounded-lg hover:bg-secondary-50 transition-smooth"
           >
             <div className="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center mr-3">
-              <Icon 
-                name={getCategoryIcon(item.category)} 
-                size={20} 
+              <Icon
+                name={getCategoryIcon(item.category)}
+                size={20}
                 className="text-primary"
               />
             </div>
-            
+
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between">
                 <div>
@@ -47,12 +47,16 @@ function TopSellingItems({ items }) {
                     ${item.revenue.toLocaleString()}
                   </p>
                   <div className="flex items-center text-xs">
-                    <Icon 
-                      name={item.growth >= 0 ? "TrendingUp" : "TrendingDown"} 
-                      size={12} 
-                      className={item.growth >= 0 ? "text-success" : "text-error"} 
+                    <Icon
+                      name={item.growth >= 0 ? 'TrendingUp' : 'TrendingDown'}
+                      size={12}
+                      className={
+                        item.growth >= 0 ? 'text-success' : 'text-error'
+                      }
                     />
-                    <span className={`ml-1 ${item.growth >= 0 ? "text-success" : "text-error"}`}>
+                    <span
+                      className={`ml-1 ${item.growth >= 0 ? 'text-success' : 'text-error'}`}
+                    >
                       {Math.abs(item.growth)}%
                     </span>
                   </div>
@@ -76,18 +80,18 @@ function TopSellingItems({ items }) {
 // Helper function to get icon based on food category
 function getCategoryIcon(category) {
   const iconMap = {
-    'Pizza': 'Pizza',
-    'Pasta': 'Utensils',
-    'Burgers': 'Sandwich',
-    'Salads': 'Salad',
-    'Desserts': 'Cake',
-    'Drinks': 'Coffee',
-    'Appetizers': 'UtensilsCrossed',
-    'Seafood': 'Fish',
-    'Chicken': 'Drumstick',
-    'Vegetarian': 'Leaf'
+    Pizza: 'Pizza',
+    Pasta: 'Utensils',
+    Burgers: 'Sandwich',
+    Salads: 'Salad',
+    Desserts: 'Cake',
+    Drinks: 'Coffee',
+    Appetizers: 'UtensilsCrossed',
+    Seafood: 'Fish',
+    Chicken: 'Drumstick',
+    Vegetarian: 'Leaf',
   };
-  
+
   return iconMap[category] || 'Utensils';
 }
 

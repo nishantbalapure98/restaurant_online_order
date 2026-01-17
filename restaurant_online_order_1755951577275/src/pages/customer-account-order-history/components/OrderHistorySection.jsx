@@ -24,10 +24,10 @@ function OrderHistorySection() {
       items: [
         { name: 'Margherita Pizza', quantity: 1, price: 18.99 },
         { name: 'Caesar Salad', quantity: 1, price: 12.99 },
-        { name: 'Coca Cola', quantity: 2, price: 3.99 }
+        { name: 'Coca Cola', quantity: 2, price: 3.99 },
       ],
       subtotal: 39.96,
-      tax: 3.20,
+      tax: 3.2,
       delivery: 2.99,
       total: 46.15,
       paymentMethod: 'Credit Card •••• 4242',
@@ -36,7 +36,7 @@ function OrderHistorySection() {
       actualTime: '28 mins',
       driver: 'Mike Johnson',
       rating: 5,
-      hasReview: true
+      hasReview: true,
     },
     {
       id: 'ORD-2024-002',
@@ -45,7 +45,7 @@ function OrderHistorySection() {
       restaurant: 'Westside Location',
       items: [
         { name: 'BBQ Bacon Burger', quantity: 1, price: 19.99 },
-        { name: 'Sweet Potato Fries', quantity: 1, price: 8.99 }
+        { name: 'Sweet Potato Fries', quantity: 1, price: 8.99 },
       ],
       subtotal: 28.98,
       tax: 2.32,
@@ -55,7 +55,7 @@ function OrderHistorySection() {
       deliveryAddress: '123 Main St, Apt 4B',
       cancelReason: 'Restaurant was closed',
       refundAmount: 34.29,
-      hasReview: false
+      hasReview: false,
     },
     {
       id: 'ORD-2024-003',
@@ -65,7 +65,7 @@ function OrderHistorySection() {
       items: [
         { name: 'Spicy Thai Curry', quantity: 1, price: 16.99 },
         { name: 'Jasmine Rice', quantity: 1, price: 4.99 },
-        { name: 'Spring Rolls', quantity: 1, price: 9.99 }
+        { name: 'Spring Rolls', quantity: 1, price: 9.99 },
       ],
       subtotal: 31.97,
       tax: 2.56,
@@ -77,8 +77,8 @@ function OrderHistorySection() {
       actualTime: '35 mins',
       driver: 'Sarah Wilson',
       rating: 4,
-      hasReview: true
-    }
+      hasReview: true,
+    },
   ];
 
   const statusOptions = [
@@ -86,21 +86,21 @@ function OrderHistorySection() {
     { value: 'delivered', label: 'Delivered' },
     { value: 'cancelled', label: 'Cancelled' },
     { value: 'pending', label: 'Pending' },
-    { value: 'preparing', label: 'Preparing' }
+    { value: 'preparing', label: 'Preparing' },
   ];
 
   const locationOptions = [
     { value: 'all', label: 'All Locations' },
     { value: 'Downtown Branch', label: 'Downtown Branch' },
     { value: 'Westside Location', label: 'Westside Location' },
-    { value: 'Northpoint Mall', label: 'Northpoint Mall' }
+    { value: 'Northpoint Mall', label: 'Northpoint Mall' },
   ];
 
   const dateOptions = [
     { value: 'all', label: 'All Time' },
     { value: 'week', label: 'Past Week' },
     { value: 'month', label: 'Past Month' },
-    { value: '3months', label: 'Past 3 Months' }
+    { value: '3months', label: 'Past 3 Months' },
   ];
 
   const filteredOrders = useMemo(() => {
@@ -108,12 +108,15 @@ function OrderHistorySection() {
 
     // Search filter
     if (searchQuery) {
-      filtered = filtered?.filter(order =>
-        order?.id?.toLowerCase()?.includes(searchQuery?.toLowerCase()) ||
-        order?.restaurant?.toLowerCase()?.includes(searchQuery?.toLowerCase()) ||
-        order?.items?.some(item => 
-          item?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase())
-        )
+      filtered = filtered?.filter(
+        order =>
+          order?.id?.toLowerCase()?.includes(searchQuery?.toLowerCase()) ||
+          order?.restaurant
+            ?.toLowerCase()
+            ?.includes(searchQuery?.toLowerCase()) ||
+          order?.items?.some(item =>
+            item?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase())
+          )
       );
     }
 
@@ -124,14 +127,16 @@ function OrderHistorySection() {
 
     // Location filter
     if (locationFilter !== 'all') {
-      filtered = filtered?.filter(order => order?.restaurant === locationFilter);
+      filtered = filtered?.filter(
+        order => order?.restaurant === locationFilter
+      );
     }
 
     // Date filter
     if (dateFilter !== 'all') {
       const now = new Date();
       const filterDate = new Date();
-      
+
       switch (dateFilter) {
         case 'week':
           filterDate.setDate(now.getDate() - 7);
@@ -143,39 +148,51 @@ function OrderHistorySection() {
           filterDate.setMonth(now.getMonth() - 3);
           break;
       }
-      
+
       filtered = filtered?.filter(order => order?.date >= filterDate);
     }
 
     return filtered?.sort((a, b) => new Date(b?.date) - new Date(a?.date));
   }, [searchQuery, statusFilter, locationFilter, dateFilter, orders]);
 
-  const getStatusColor = (status) => {
+  const getStatusColor = status => {
     switch (status) {
-      case 'delivered': return 'text-success-600 bg-success-100';
-      case 'cancelled': return 'text-error-600 bg-error-100';
-      case 'pending': return 'text-warning-600 bg-warning-100';
-      case 'preparing': return 'text-accent-600 bg-accent-100';
-      default: return 'text-text-secondary bg-secondary-100';
+      case 'delivered':
+        return 'text-success-600 bg-success-100';
+      case 'cancelled':
+        return 'text-error-600 bg-error-100';
+      case 'pending':
+        return 'text-warning-600 bg-warning-100';
+      case 'preparing':
+        return 'text-accent-600 bg-accent-100';
+      default:
+        return 'text-text-secondary bg-secondary-100';
     }
   };
 
-  const getStatusIcon = (status) => {
+  const getStatusIcon = status => {
     switch (status) {
-      case 'delivered': return 'CheckCircle';
-      case 'cancelled': return 'XCircle';
-      case 'pending': return 'Clock';
-      case 'preparing': return 'ChefHat';
-      default: return 'Package';
+      case 'delivered':
+        return 'CheckCircle';
+      case 'cancelled':
+        return 'XCircle';
+      case 'pending':
+        return 'Clock';
+      case 'preparing':
+        return 'ChefHat';
+      default:
+        return 'Package';
     }
   };
 
-  const handleReorder = async (order) => {
+  const handleReorder = async order => {
     setIsLoading(true);
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      navigate('/shopping-cart-checkout', { state: { reorderItems: order?.items } });
+      navigate('/shopping-cart-checkout', {
+        state: { reorderItems: order?.items },
+      });
     } catch (error) {
       console.error('Failed to reorder:', error);
     } finally {
@@ -183,21 +200,21 @@ function OrderHistorySection() {
     }
   };
 
-  const handleTrackOrder = (order) => {
+  const handleTrackOrder = order => {
     navigate('/order-tracking-status', { state: { orderId: order?.id } });
   };
 
-  const handleDownloadReceipt = (order) => {
+  const handleDownloadReceipt = order => {
     console.log('Downloading receipt for order:', order?.id);
     // In real app, this would generate and download PDF
   };
 
-  const handleRateOrder = (order) => {
+  const handleRateOrder = order => {
     console.log('Rating order:', order?.id);
     // In real app, this would open rating modal
   };
 
-  const toggleOrderExpansion = (orderId) => {
+  const toggleOrderExpansion = orderId => {
     setExpandedOrder(expandedOrder === orderId ? null : orderId);
   };
 
@@ -216,12 +233,16 @@ function OrderHistorySection() {
 
         {/* Search Bar */}
         <div className="relative mb-4">
-          <Icon name="Search" size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary" />
+          <Icon
+            name="Search"
+            size={20}
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary"
+          />
           <input
             type="text"
             placeholder="Search by order ID, restaurant, or items..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={e => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body"
           />
           {searchQuery && (
@@ -242,7 +263,7 @@ function OrderHistorySection() {
             </label>
             <select
               value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              onChange={e => setStatusFilter(e.target.value)}
               className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body"
             >
               {statusOptions?.map(option => (
@@ -252,14 +273,14 @@ function OrderHistorySection() {
               ))}
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-body font-body-medium text-text-primary mb-2">
               Location
             </label>
             <select
               value={locationFilter}
-              onChange={(e) => setLocationFilter(e.target.value)}
+              onChange={e => setLocationFilter(e.target.value)}
               className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body"
             >
               {locationOptions?.map(option => (
@@ -269,14 +290,14 @@ function OrderHistorySection() {
               ))}
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-body font-body-medium text-text-primary mb-2">
               Date Range
             </label>
             <select
               value={dateFilter}
-              onChange={(e) => setDateFilter(e.target.value)}
+              onChange={e => setDateFilter(e.target.value)}
               className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body"
             >
               {dateOptions?.map(option => (
@@ -299,7 +320,12 @@ function OrderHistorySection() {
             No orders found
           </h3>
           <p className="text-text-secondary font-body mb-6">
-            {searchQuery || statusFilter !== 'all' || locationFilter !== 'all' || dateFilter !== 'all' ?'Try adjusting your search or filters to find your orders.' : "You haven't placed any orders yet. Start browsing our menu!"}
+            {searchQuery ||
+            statusFilter !== 'all' ||
+            locationFilter !== 'all' ||
+            dateFilter !== 'all'
+              ? 'Try adjusting your search or filters to find your orders.'
+              : "You haven't placed any orders yet. Start browsing our menu!"}
           </p>
           <button
             onClick={() => navigate('/menu-browse-search')}
@@ -310,10 +336,13 @@ function OrderHistorySection() {
         </div>
       ) : (
         <div className="space-y-4">
-          {filteredOrders?.map((order) => (
-            <div key={order?.id} className="bg-surface rounded-lg shadow-soft overflow-hidden">
+          {filteredOrders?.map(order => (
+            <div
+              key={order?.id}
+              className="bg-surface rounded-lg shadow-soft overflow-hidden"
+            >
               {/* Order Header */}
-              <div 
+              <div
                 className="p-6 cursor-pointer hover:bg-secondary-50 transition-smooth"
                 onClick={() => toggleOrderExpansion(order?.id)}
               >
@@ -321,31 +350,41 @@ function OrderHistorySection() {
                   <div className="flex-1">
                     <div className="flex items-center space-x-4 mb-2">
                       <div className="flex items-center space-x-2">
-                        <Icon name={getStatusIcon(order?.status)} size={20} className={getStatusColor(order?.status)?.split(' ')[0]} />
-                        <span className={`px-3 py-1 rounded-full text-sm font-body font-body-medium ${getStatusColor(order?.status)}`}>
-                          {order?.status?.charAt(0)?.toUpperCase() + order?.status?.slice(1)}
+                        <Icon
+                          name={getStatusIcon(order?.status)}
+                          size={20}
+                          className={
+                            getStatusColor(order?.status)?.split(' ')[0]
+                          }
+                        />
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm font-body font-body-medium ${getStatusColor(order?.status)}`}
+                        >
+                          {order?.status?.charAt(0)?.toUpperCase() +
+                            order?.status?.slice(1)}
                         </span>
                       </div>
-                      
+
                       <span className="text-sm text-text-secondary font-body">
                         {format(new Date(order?.date), 'MMM dd, yyyy • h:mm a')}
                       </span>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-heading font-heading-medium text-text-primary mb-1">
                           Order #{order?.id}
                         </h3>
                         <p className="text-sm text-text-secondary font-body">
-                          {order?.restaurant} • {order?.items?.length} items • ${order?.total?.toFixed(2)}
+                          {order?.restaurant} • {order?.items?.length} items • $
+                          {order?.total?.toFixed(2)}
                         </p>
                       </div>
-                      
+
                       <div className="flex items-center space-x-3">
                         {order?.status === 'delivered' && (
                           <button
-                            onClick={(e) => {
+                            onClick={e => {
                               e.stopPropagation();
                               handleReorder(order);
                             }}
@@ -356,11 +395,15 @@ function OrderHistorySection() {
                             <span>Reorder</span>
                           </button>
                         )}
-                        
-                        <Icon 
-                          name={expandedOrder === order?.id ? "ChevronUp" : "ChevronDown"} 
-                          size={20} 
-                          className="text-text-secondary" 
+
+                        <Icon
+                          name={
+                            expandedOrder === order?.id
+                              ? 'ChevronUp'
+                              : 'ChevronDown'
+                          }
+                          size={20}
+                          className="text-text-secondary"
                         />
                       </div>
                     </div>
@@ -379,35 +422,54 @@ function OrderHistorySection() {
                       </h4>
                       <div className="space-y-2">
                         {order?.items?.map((item, index) => (
-                          <div key={index} className="flex items-center justify-between py-2">
+                          <div
+                            key={index}
+                            className="flex items-center justify-between py-2"
+                          >
                             <div className="flex items-center space-x-3">
                               <span className="w-6 h-6 bg-primary-100 text-primary text-xs rounded-full flex items-center justify-center font-body font-body-medium">
                                 {item?.quantity}
                               </span>
-                              <span className="font-body text-text-primary">{item?.name}</span>
+                              <span className="font-body text-text-primary">
+                                {item?.name}
+                              </span>
                             </div>
                             <span className="font-body text-text-primary">
                               ${(item?.price * item?.quantity)?.toFixed(2)}
                             </span>
                           </div>
                         ))}
-                        
+
                         <div className="border-t border-border pt-2 mt-3 space-y-1">
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-secondary font-body">Subtotal</span>
-                            <span className="text-text-primary font-body">${order?.subtotal?.toFixed(2)}</span>
+                            <span className="text-text-secondary font-body">
+                              Subtotal
+                            </span>
+                            <span className="text-text-primary font-body">
+                              ${order?.subtotal?.toFixed(2)}
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-secondary font-body">Tax</span>
-                            <span className="text-text-primary font-body">${order?.tax?.toFixed(2)}</span>
+                            <span className="text-text-secondary font-body">
+                              Tax
+                            </span>
+                            <span className="text-text-primary font-body">
+                              ${order?.tax?.toFixed(2)}
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span className="text-text-secondary font-body">Delivery</span>
-                            <span className="text-text-primary font-body">${order?.delivery?.toFixed(2)}</span>
+                            <span className="text-text-secondary font-body">
+                              Delivery
+                            </span>
+                            <span className="text-text-primary font-body">
+                              ${order?.delivery?.toFixed(2)}
+                            </span>
                           </div>
                           <div className="flex justify-between font-body font-body-medium border-t border-border pt-1">
                             <span className="text-text-primary">Total</span>
-                            <span className="text-text-primary">${order?.total?.toFixed(2)}</span>
+                            <span className="text-text-primary">
+                              ${order?.total?.toFixed(2)}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -423,16 +485,20 @@ function OrderHistorySection() {
                           <label className="block text-sm text-text-secondary font-body mb-1">
                             Delivery Address
                           </label>
-                          <p className="font-body text-text-primary">{order?.deliveryAddress}</p>
+                          <p className="font-body text-text-primary">
+                            {order?.deliveryAddress}
+                          </p>
                         </div>
-                        
+
                         <div>
                           <label className="block text-sm text-text-secondary font-body mb-1">
                             Payment Method
                           </label>
-                          <p className="font-body text-text-primary">{order?.paymentMethod}</p>
+                          <p className="font-body text-text-primary">
+                            {order?.paymentMethod}
+                          </p>
                         </div>
-                        
+
                         {order?.status === 'delivered' && (
                           <>
                             <div>
@@ -440,33 +506,40 @@ function OrderHistorySection() {
                                 Delivery Time
                               </label>
                               <p className="font-body text-text-primary">
-                                {order?.actualTime} (estimated {order?.estimatedTime})
+                                {order?.actualTime} (estimated{' '}
+                                {order?.estimatedTime})
                               </p>
                             </div>
-                            
+
                             <div>
                               <label className="block text-sm text-text-secondary font-body mb-1">
                                 Driver
                               </label>
-                              <p className="font-body text-text-primary">{order?.driver}</p>
+                              <p className="font-body text-text-primary">
+                                {order?.driver}
+                              </p>
                             </div>
                           </>
                         )}
-                        
+
                         {order?.status === 'cancelled' && (
                           <>
                             <div>
                               <label className="block text-sm text-text-secondary font-body mb-1">
                                 Cancellation Reason
                               </label>
-                              <p className="font-body text-text-primary">{order?.cancelReason}</p>
+                              <p className="font-body text-text-primary">
+                                {order?.cancelReason}
+                              </p>
                             </div>
-                            
+
                             <div>
                               <label className="block text-sm text-text-secondary font-body mb-1">
                                 Refund Amount
                               </label>
-                              <p className="font-body text-success-600">${order?.refundAmount?.toFixed(2)}</p>
+                              <p className="font-body text-success-600">
+                                ${order?.refundAmount?.toFixed(2)}
+                              </p>
                             </div>
                           </>
                         )}
@@ -483,7 +556,7 @@ function OrderHistorySection() {
                       <Icon name="Download" size={16} />
                       <span>Download Receipt</span>
                     </button>
-                    
+
                     {order?.status === 'delivered' && !order?.hasReview && (
                       <button
                         onClick={() => handleRateOrder(order)}
@@ -493,8 +566,9 @@ function OrderHistorySection() {
                         <span>Rate Order</span>
                       </button>
                     )}
-                    
-                    {(order?.status === 'pending' || order?.status === 'preparing') && (
+
+                    {(order?.status === 'pending' ||
+                      order?.status === 'preparing') && (
                       <button
                         onClick={() => handleTrackOrder(order)}
                         className="flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-700 transition-smooth font-body font-body-medium"

@@ -1,10 +1,17 @@
 import React from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from 'recharts';
 
 function OrderStatusChart({ data }) {
   // Colors for different order statuses
   const COLORS = ['#27AE60', '#F39C12', '#E74C3C'];
-  
+
   // Calculate total orders
   const totalOrders = data.reduce((sum, item) => sum + item.value, 0);
 
@@ -13,14 +20,15 @@ function OrderStatusChart({ data }) {
     if (active && payload && payload.length) {
       const item = payload[0];
       const percentage = ((item.value / totalOrders) * 100).toFixed(1);
-      
+
       return (
         <div className="bg-surface p-3 border border-border rounded-lg shadow-floating">
           <p className="font-body font-body-medium text-text-primary mb-1">
             {item.name}
           </p>
           <p className="text-sm font-body">
-            <span className="font-body-medium">{item.value}</span> orders ({percentage}%)
+            <span className="font-body-medium">{item.value}</span> orders (
+            {percentage}%)
           </p>
         </div>
       );
@@ -34,8 +42,8 @@ function OrderStatusChart({ data }) {
       <div className="flex flex-wrap justify-center gap-4 mt-4">
         {payload.map((entry, index) => (
           <div key={`legend-${index}`} className="flex items-center">
-            <div 
-              className="w-3 h-3 rounded-full mr-2" 
+            <div
+              className="w-3 h-3 rounded-full mr-2"
               style={{ backgroundColor: entry.color }}
             />
             <span className="text-sm font-body text-text-secondary">
@@ -72,7 +80,10 @@ function OrderStatusChart({ data }) {
               nameKey="status"
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip content={<CustomTooltip />} />
@@ -85,7 +96,10 @@ function OrderStatusChart({ data }) {
       <div className="mt-4 grid grid-cols-3 gap-2 text-center">
         {data.map((item, index) => (
           <div key={index} className="p-2">
-            <p className="text-2xl font-heading font-heading-medium" style={{ color: COLORS[index] }}>
+            <p
+              className="text-2xl font-heading font-heading-medium"
+              style={{ color: COLORS[index] }}
+            >
               {item.value}
             </p>
             <p className="text-xs text-text-secondary font-body truncate">

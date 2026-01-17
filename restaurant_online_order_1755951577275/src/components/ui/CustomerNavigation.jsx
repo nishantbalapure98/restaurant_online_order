@@ -14,7 +14,7 @@ function CustomerNavigation() {
     { label: 'Account', path: '/customer-account-order-history', icon: 'User' },
   ];
 
-  const isActivePath = (path) => location.pathname === path;
+  const isActivePath = path => location.pathname === path;
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -29,7 +29,10 @@ function CustomerNavigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/menu-browse-search" className="flex items-center space-x-2">
+          <Link
+            to="/menu-browse-search"
+            className="flex items-center space-x-2"
+          >
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <Icon name="ChefHat" size={20} color="white" />
             </div>
@@ -40,13 +43,14 @@ function CustomerNavigation() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {navigationItems.map((item) => (
+            {navigationItems.map(item => (
               <Link
                 key={item.path}
                 to={item.path}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-smooth font-body font-body-medium ${
                   isActivePath(item.path)
-                    ? 'text-primary bg-primary-50' :'text-text-secondary hover:text-primary hover:bg-primary-50'
+                    ? 'text-primary bg-primary-50'
+                    : 'text-text-secondary hover:text-primary hover:bg-primary-50'
                 }`}
               >
                 <Icon name={item.icon} size={18} />
@@ -94,7 +98,7 @@ function CustomerNavigation() {
               onClick={toggleMobileMenu}
               className="md:hidden p-2 text-text-secondary hover:text-primary transition-smooth"
             >
-              <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={24} />
+              <Icon name={isMobileMenuOpen ? 'X' : 'Menu'} size={24} />
             </button>
           </div>
         </div>
@@ -104,21 +108,22 @@ function CustomerNavigation() {
       {isMobileMenuOpen && (
         <div className="md:hidden fixed inset-0 top-16 z-dropdown bg-surface shadow-floating">
           <nav className="px-4 py-6 space-y-4">
-            {navigationItems.map((item) => (
+            {navigationItems.map(item => (
               <Link
                 key={item.path}
                 to={item.path}
                 onClick={closeMobileMenu}
                 className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-smooth font-body font-body-medium min-h-touch ${
                   isActivePath(item.path)
-                    ? 'text-primary bg-primary-50' :'text-text-secondary hover:text-primary hover:bg-primary-50'
+                    ? 'text-primary bg-primary-50'
+                    : 'text-text-secondary hover:text-primary hover:bg-primary-50'
                 }`}
               >
                 <Icon name={item.icon} size={20} />
                 <span>{item.label}</span>
               </Link>
             ))}
-            
+
             <div className="border-t border-border pt-4 mt-4">
               {isLoggedIn ? (
                 <Link

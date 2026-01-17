@@ -33,29 +33,49 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
       'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&h=600&fit=crop',
     ],
     sizes: [
-      { id: 'small', name: 'Small (10")', price: 0, description: 'Perfect for 1-2 people' },
-      { id: 'medium', name: 'Medium (12")', price: 3.00, description: 'Great for 2-3 people' },
-      { id: 'large', name: 'Large (14")', price: 6.00, description: 'Ideal for 3-4 people' },
-      { id: 'xlarge', name: 'X-Large (16")', price: 9.00, description: 'Perfect for sharing' }
+      {
+        id: 'small',
+        name: 'Small (10")',
+        price: 0,
+        description: 'Perfect for 1-2 people',
+      },
+      {
+        id: 'medium',
+        name: 'Medium (12")',
+        price: 3.0,
+        description: 'Great for 2-3 people',
+      },
+      {
+        id: 'large',
+        name: 'Large (14")',
+        price: 6.0,
+        description: 'Ideal for 3-4 people',
+      },
+      {
+        id: 'xlarge',
+        name: 'X-Large (16")',
+        price: 9.0,
+        description: 'Perfect for sharing',
+      },
     ],
     spiceLevels: [
       { level: 0, name: 'No Spice', icon: '🌿' },
       { level: 1, name: 'Mild', icon: '🌶️' },
       { level: 2, name: 'Medium', icon: '🌶️🌶️' },
       { level: 3, name: 'Hot', icon: '🌶️🌶️🌶️' },
-      { level: 4, name: 'Extra Hot', icon: '🔥🔥🔥' }
+      { level: 4, name: 'Extra Hot', icon: '🔥🔥🔥' },
     ],
     ingredients: [
-      { id: 'extra-cheese', name: 'Extra Cheese', price: 2.50, type: 'add' },
-      { id: 'pepperoni', name: 'Pepperoni', price: 3.00, type: 'add' },
-      { id: 'mushrooms', name: 'Mushrooms', price: 1.50, type: 'add' },
-      { id: 'bell-peppers', name: 'Bell Peppers', price: 1.50, type: 'add' },
-      { id: 'olives', name: 'Black Olives', price: 2.00, type: 'add' },
-      { id: 'remove-cheese', name: 'No Cheese', price: -2.00, type: 'remove' },
-      { id: 'remove-basil', name: 'No Basil', price: 0, type: 'remove' }
+      { id: 'extra-cheese', name: 'Extra Cheese', price: 2.5, type: 'add' },
+      { id: 'pepperoni', name: 'Pepperoni', price: 3.0, type: 'add' },
+      { id: 'mushrooms', name: 'Mushrooms', price: 1.5, type: 'add' },
+      { id: 'bell-peppers', name: 'Bell Peppers', price: 1.5, type: 'add' },
+      { id: 'olives', name: 'Black Olives', price: 2.0, type: 'add' },
+      { id: 'remove-cheese', name: 'No Cheese', price: -2.0, type: 'remove' },
+      { id: 'remove-basil', name: 'No Basil', price: 0, type: 'remove' },
     ],
     allergens: ['Gluten', 'Dairy'],
     nutrition: {
@@ -64,10 +84,10 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
       carbs: '36g',
       fat: '10g',
       fiber: '2g',
-      sodium: '640mg'
+      sodium: '640mg',
     },
     availability: true,
-    category: 'Pizza'
+    category: 'Pizza',
   };
 
   const mockReviews = [
@@ -76,25 +96,32 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
       customerName: 'Sarah Johnson',
       rating: 5,
       date: '2024-01-15',
-      comment: 'Absolutely delicious! The crust was perfectly crispy and the ingredients tasted so fresh. Will definitely order again.',
-      images: ['https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=200&h=150&fit=crop']
+      comment:
+        'Absolutely delicious! The crust was perfectly crispy and the ingredients tasted so fresh. Will definitely order again.',
+      images: [
+        'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=200&h=150&fit=crop',
+      ],
     },
     {
       id: 2,
       customerName: 'Mike Chen',
       rating: 4,
       date: '2024-01-12',
-      comment: 'Great pizza, authentic taste. The delivery was quick too. Only wish the large size was a bit bigger for the price.',
-      images: []
+      comment:
+        'Great pizza, authentic taste. The delivery was quick too. Only wish the large size was a bit bigger for the price.',
+      images: [],
     },
     {
       id: 3,
       customerName: 'Emma Wilson',
       rating: 5,
       date: '2024-01-10',
-      comment: 'Best Margherita pizza in town! The basil was so aromatic and the mozzarella was creamy. Highly recommended!',
-      images: ['https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200&h=150&fit=crop']
-    }
+      comment:
+        'Best Margherita pizza in town! The basil was so aromatic and the mozzarella was creamy. Highly recommended!',
+      images: [
+        'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200&h=150&fit=crop',
+      ],
+    },
   ];
 
   const mockRelatedItems = [
@@ -102,30 +129,34 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
       id: 'item-002',
       name: 'Pepperoni Pizza',
       price: 21.99,
-      image: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=300&h=200&fit=crop',
-      rating: 4.6
+      image:
+        'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=300&h=200&fit=crop',
+      rating: 4.6,
     },
     {
       id: 'item-003',
       name: 'Caesar Salad',
       price: 12.99,
-      image: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=300&h=200&fit=crop',
-      rating: 4.5
+      image:
+        'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=300&h=200&fit=crop',
+      rating: 4.5,
     },
     {
       id: 'item-004',
       name: 'Garlic Bread',
       price: 8.99,
-      image: 'https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?w=300&h=200&fit=crop',
-      rating: 4.8
+      image:
+        'https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?w=300&h=200&fit=crop',
+      rating: 4.8,
     },
     {
       id: 'item-005',
       name: 'Tiramisu',
       price: 7.99,
-      image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=300&h=200&fit=crop',
-      rating: 4.9
-    }
+      image:
+        'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=300&h=200&fit=crop',
+      rating: 4.9,
+    },
   ];
 
   useEffect(() => {
@@ -140,36 +171,40 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
 
   const calculateTotalPrice = () => {
     if (!selectedItem) return 0;
-    
+
     let total = selectedItem.basePrice;
-    
+
     // Add size price
-    const selectedSizeData = selectedItem.sizes.find(size => size.id === selectedSize);
+    const selectedSizeData = selectedItem.sizes.find(
+      size => size.id === selectedSize
+    );
     if (selectedSizeData) {
       total += selectedSizeData.price;
     }
-    
+
     // Add ingredient prices
     Object.keys(selectedIngredients).forEach(ingredientId => {
       if (selectedIngredients[ingredientId]) {
-        const ingredient = selectedItem.ingredients.find(ing => ing.id === ingredientId);
+        const ingredient = selectedItem.ingredients.find(
+          ing => ing.id === ingredientId
+        );
         if (ingredient) {
           total += ingredient.price;
         }
       }
     });
-    
+
     return total * quantity;
   };
 
-  const handleIngredientToggle = (ingredientId) => {
+  const handleIngredientToggle = ingredientId => {
     setSelectedIngredients(prev => ({
       ...prev,
-      [ingredientId]: !prev[ingredientId]
+      [ingredientId]: !prev[ingredientId],
     }));
   };
 
-  const handleQuantityChange = (change) => {
+  const handleQuantityChange = change => {
     const newQuantity = quantity + change;
     if (newQuantity >= 1 && newQuantity <= 10) {
       setQuantity(newQuantity);
@@ -185,31 +220,31 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
       ingredients: selectedIngredients,
       specialInstructions,
       quantity,
-      totalPrice: calculateTotalPrice()
+      totalPrice: calculateTotalPrice(),
     };
-    
+
     console.log('Adding to cart:', cartItem);
     setCartItemCount(prev => prev + quantity);
-    
+
     // Show success message or navigate
     navigate('/shopping-cart-checkout');
   };
 
-  const handleImageNavigation = (direction) => {
+  const handleImageNavigation = direction => {
     if (!selectedItem) return;
-    
+
     if (direction === 'prev') {
-      setCurrentImageIndex(prev => 
+      setCurrentImageIndex(prev =>
         prev === 0 ? selectedItem.images.length - 1 : prev - 1
       );
     } else {
-      setCurrentImageIndex(prev => 
+      setCurrentImageIndex(prev =>
         prev === selectedItem.images.length - 1 ? 0 : prev + 1
       );
     }
   };
 
-  const handleRelatedItemClick = (itemId) => {
+  const handleRelatedItemClick = itemId => {
     // In real app, this would fetch new item data
     console.log('Navigate to item:', itemId);
   };
@@ -222,8 +257,14 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <Icon name="Loader2" size={48} className="text-primary animate-spin mx-auto mb-4" />
-          <p className="text-text-secondary font-body">Loading item details...</p>
+          <Icon
+            name="Loader2"
+            size={48}
+            className="text-primary animate-spin mx-auto mb-4"
+          />
+          <p className="text-text-secondary font-body">
+            Loading item details...
+          </p>
         </div>
       </div>
     );
@@ -232,7 +273,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
   return (
     <div className="min-h-screen bg-background">
       <CustomerNavigation />
-      
+
       {/* Mobile: Full Screen Layout */}
       <div className="lg:hidden pt-16">
         {/* Header */}
@@ -250,7 +291,11 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
             onClick={() => setIsFavorite(!isFavorite)}
             className="p-2 text-text-secondary hover:text-primary transition-smooth"
           >
-            <Icon name={isFavorite ? "Heart" : "Heart"} size={24} className={isFavorite ? "text-error fill-current" : ""} />
+            <Icon
+              name={isFavorite ? 'Heart' : 'Heart'}
+              size={24}
+              className={isFavorite ? 'text-error fill-current' : ''}
+            />
           </button>
         </div>
 
@@ -261,7 +306,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
             alt={selectedItem.name}
             className="w-full h-full object-cover"
           />
-          
+
           {selectedItem.images.length > 1 && (
             <>
               <button
@@ -276,7 +321,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
               >
                 <Icon name="ChevronRight" size={20} />
               </button>
-              
+
               {/* Image Indicators */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                 {selectedItem.images.map((_, index) => (
@@ -284,7 +329,9 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
                     className={`w-2 h-2 rounded-full transition-smooth ${
-                      index === currentImageIndex ? 'bg-surface' : 'bg-surface bg-opacity-50'
+                      index === currentImageIndex
+                        ? 'bg-surface'
+                        : 'bg-surface bg-opacity-50'
                     }`}
                   />
                 ))}
@@ -304,7 +351,11 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                 </h2>
                 <div className="flex items-center space-x-4 mb-3">
                   <div className="flex items-center space-x-1">
-                    <Icon name="Star" size={16} className="text-warning fill-current" />
+                    <Icon
+                      name="Star"
+                      size={16}
+                      className="text-warning fill-current"
+                    />
                     <span className="text-sm font-body font-body-medium text-text-primary">
                       {selectedItem.rating}
                     </span>
@@ -314,7 +365,9 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                   </div>
                   <div className="flex items-center space-x-1 text-text-secondary">
                     <Icon name="Clock" size={16} />
-                    <span className="text-sm font-body">{selectedItem.prepTime}</span>
+                    <span className="text-sm font-body">
+                      {selectedItem.prepTime}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -327,16 +380,20 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                 </div>
               </div>
             </div>
-            
+
             <p className="text-text-secondary font-body leading-relaxed">
               {selectedItem.description}
             </p>
-            
+
             {/* Allergen Info */}
             {selectedItem.allergens.length > 0 && (
               <div className="mt-4 p-3 bg-warning-50 border border-warning-200 rounded-lg">
                 <div className="flex items-center space-x-2 mb-2">
-                  <Icon name="AlertTriangle" size={16} className="text-warning" />
+                  <Icon
+                    name="AlertTriangle"
+                    size={16}
+                    className="text-warning"
+                  />
                   <span className="text-sm font-body font-body-medium text-warning-600">
                     Allergen Information
                   </span>
@@ -354,13 +411,14 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
               Choose Size
             </h3>
             <div className="space-y-3">
-              {selectedItem.sizes.map((size) => (
+              {selectedItem.sizes.map(size => (
                 <button
                   key={size.id}
                   onClick={() => setSelectedSize(size.id)}
                   className={`w-full p-4 rounded-lg border-2 transition-smooth text-left ${
                     selectedSize === size.id
-                      ? 'border-primary bg-primary-50' :'border-border hover:border-primary-200'
+                      ? 'border-primary bg-primary-50'
+                      : 'border-border hover:border-primary-200'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -389,13 +447,14 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
               Spice Level
             </h3>
             <div className="space-y-3">
-              {selectedItem.spiceLevels.map((level) => (
+              {selectedItem.spiceLevels.map(level => (
                 <button
                   key={level.level}
                   onClick={() => setSpiceLevel(level.level)}
                   className={`w-full p-3 rounded-lg border transition-smooth text-left ${
                     spiceLevel === level.level
-                      ? 'border-primary bg-primary-50' :'border-border hover:border-primary-200'
+                      ? 'border-primary bg-primary-50'
+                      : 'border-border hover:border-primary-200'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
@@ -415,7 +474,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
               Customize Ingredients
             </h3>
             <div className="space-y-3">
-              {selectedItem.ingredients.map((ingredient) => (
+              {selectedItem.ingredients.map(ingredient => (
                 <div
                   key={ingredient.id}
                   className="flex items-center justify-between p-3 border border-border rounded-lg"
@@ -425,7 +484,8 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                       onClick={() => handleIngredientToggle(ingredient.id)}
                       className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-smooth ${
                         selectedIngredients[ingredient.id]
-                          ? 'border-primary bg-primary' :'border-border'
+                          ? 'border-primary bg-primary'
+                          : 'border-border'
                       }`}
                     >
                       {selectedIngredients[ingredient.id] && (
@@ -442,8 +502,11 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                     </div>
                   </div>
                   <div className="font-body font-body-medium text-text-primary">
-                    {ingredient.price > 0 ? `+$${ingredient.price.toFixed(2)}` : 
-                     ingredient.price < 0 ? `-$${Math.abs(ingredient.price).toFixed(2)}` : 'Free'}
+                    {ingredient.price > 0
+                      ? `+$${ingredient.price.toFixed(2)}`
+                      : ingredient.price < 0
+                        ? `-$${Math.abs(ingredient.price).toFixed(2)}`
+                        : 'Free'}
                   </div>
                 </div>
               ))}
@@ -457,7 +520,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
             </h3>
             <textarea
               value={specialInstructions}
-              onChange={(e) => setSpecialInstructions(e.target.value)}
+              onChange={e => setSpecialInstructions(e.target.value)}
               placeholder="Any special requests or dietary requirements..."
               className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth font-body resize-none"
               rows={3}
@@ -477,13 +540,20 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
               <h3 className="text-lg font-heading font-heading-medium text-text-primary">
                 Nutrition Facts
               </h3>
-              <Icon name={showNutrition ? "ChevronUp" : "ChevronDown"} size={20} className="text-text-secondary" />
+              <Icon
+                name={showNutrition ? 'ChevronUp' : 'ChevronDown'}
+                size={20}
+                className="text-text-secondary"
+              />
             </button>
-            
+
             {showNutrition && (
               <div className="mt-4 grid grid-cols-2 gap-4">
                 {Object.entries(selectedItem.nutrition).map(([key, value]) => (
-                  <div key={key} className="text-center p-3 bg-secondary-50 rounded-lg">
+                  <div
+                    key={key}
+                    className="text-center p-3 bg-secondary-50 rounded-lg"
+                  >
                     <div className="text-sm text-text-secondary font-body capitalize">
                       {key}
                     </div>
@@ -506,9 +576,9 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                 View All
               </button>
             </div>
-            
+
             <div className="space-y-4">
-              {mockReviews.slice(0, 2).map((review) => (
+              {mockReviews.slice(0, 2).map(review => (
                 <div key={review.id} className="p-4 bg-secondary-50 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center space-x-2">
@@ -521,7 +591,11 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                             key={i}
                             name="Star"
                             size={12}
-                            className={i < review.rating ? "text-warning fill-current" : "text-secondary-300"}
+                            className={
+                              i < review.rating
+                                ? 'text-warning fill-current'
+                                : 'text-secondary-300'
+                            }
                           />
                         ))}
                       </div>
@@ -556,7 +630,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
               You Might Also Like
             </h3>
             <div className="flex space-x-4 overflow-x-auto pb-2">
-              {mockRelatedItems.map((item) => (
+              {mockRelatedItems.map(item => (
                 <button
                   key={item.id}
                   onClick={() => handleRelatedItemClick(item.id)}
@@ -576,7 +650,11 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                         ${item.price}
                       </span>
                       <div className="flex items-center space-x-1">
-                        <Icon name="Star" size={12} className="text-warning fill-current" />
+                        <Icon
+                          name="Star"
+                          size={12}
+                          className="text-warning fill-current"
+                        />
                         <span className="text-xs text-text-secondary font-body">
                           {item.rating}
                         </span>
@@ -630,7 +708,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
       <div className="hidden lg:block">
         <div className="fixed inset-0 z-modal flex items-center justify-center p-8 pt-24">
           {/* Backdrop */}
-          <div 
+          <div
             className="fixed inset-0 bg-secondary-900 bg-opacity-50 transition-modal"
             onClick={handleClose}
           ></div>
@@ -647,7 +725,11 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                   onClick={() => setIsFavorite(!isFavorite)}
                   className="p-2 text-text-secondary hover:text-primary transition-smooth"
                 >
-                  <Icon name={isFavorite ? "Heart" : "Heart"} size={24} className={isFavorite ? "text-error fill-current" : ""} />
+                  <Icon
+                    name={isFavorite ? 'Heart' : 'Heart'}
+                    size={24}
+                    className={isFavorite ? 'text-error fill-current' : ''}
+                  />
                 </button>
                 <button
                   onClick={handleClose}
@@ -667,7 +749,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                   alt={selectedItem.name}
                   className="w-full h-full object-cover"
                 />
-                
+
                 {selectedItem.images.length > 1 && (
                   <>
                     <button
@@ -682,7 +764,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                     >
                       <Icon name="ChevronRight" size={24} />
                     </button>
-                    
+
                     {/* Thumbnail Navigation */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                       {selectedItem.images.map((image, index) => (
@@ -690,7 +772,9 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
                           className={`w-16 h-12 rounded-lg overflow-hidden border-2 transition-smooth ${
-                            index === currentImageIndex ? 'border-primary' : 'border-surface border-opacity-50'
+                            index === currentImageIndex
+                              ? 'border-primary'
+                              : 'border-surface border-opacity-50'
                           }`}
                         >
                           <Image
@@ -714,7 +798,11 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                       <div>
                         <div className="flex items-center space-x-4 mb-2">
                           <div className="flex items-center space-x-1">
-                            <Icon name="Star" size={18} className="text-warning fill-current" />
+                            <Icon
+                              name="Star"
+                              size={18}
+                              className="text-warning fill-current"
+                            />
                             <span className="font-body font-body-medium text-text-primary">
                               {selectedItem.rating}
                             </span>
@@ -724,7 +812,9 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                           </div>
                           <div className="flex items-center space-x-1 text-text-secondary">
                             <Icon name="Clock" size={16} />
-                            <span className="font-body">{selectedItem.prepTime}</span>
+                            <span className="font-body">
+                              {selectedItem.prepTime}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -737,16 +827,20 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                         </div>
                       </div>
                     </div>
-                    
+
                     <p className="text-text-secondary font-body leading-relaxed mb-4">
                       {selectedItem.description}
                     </p>
-                    
+
                     {/* Allergen Info */}
                     {selectedItem.allergens.length > 0 && (
                       <div className="p-4 bg-warning-50 border border-warning-200 rounded-lg">
                         <div className="flex items-center space-x-2 mb-2">
-                          <Icon name="AlertTriangle" size={18} className="text-warning" />
+                          <Icon
+                            name="AlertTriangle"
+                            size={18}
+                            className="text-warning"
+                          />
                           <span className="font-body font-body-medium text-warning-600">
                             Allergen Information
                           </span>
@@ -766,20 +860,23 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                         Choose Size
                       </h3>
                       <div className="grid grid-cols-2 gap-3">
-                        {selectedItem.sizes.map((size) => (
+                        {selectedItem.sizes.map(size => (
                           <button
                             key={size.id}
                             onClick={() => setSelectedSize(size.id)}
                             className={`p-3 rounded-lg border-2 transition-smooth text-left ${
                               selectedSize === size.id
-                                ? 'border-primary bg-primary-50' :'border-border hover:border-primary-200'
+                                ? 'border-primary bg-primary-50'
+                                : 'border-border hover:border-primary-200'
                             }`}
                           >
                             <div className="font-body font-body-medium text-text-primary">
                               {size.name}
                             </div>
                             <div className="text-sm text-text-secondary font-body">
-                              {size.price > 0 ? `+$${size.price.toFixed(2)}` : 'Base'}
+                              {size.price > 0
+                                ? `+$${size.price.toFixed(2)}`
+                                : 'Base'}
                             </div>
                           </button>
                         ))}
@@ -792,13 +889,14 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                         Spice Level
                       </h3>
                       <div className="flex space-x-2">
-                        {selectedItem.spiceLevels.map((level) => (
+                        {selectedItem.spiceLevels.map(level => (
                           <button
                             key={level.level}
                             onClick={() => setSpiceLevel(level.level)}
                             className={`flex-1 p-3 rounded-lg border transition-smooth ${
                               spiceLevel === level.level
-                                ? 'border-primary bg-primary-50' :'border-border hover:border-primary-200'
+                                ? 'border-primary bg-primary-50'
+                                : 'border-border hover:border-primary-200'
                             }`}
                           >
                             <div className="text-center">
@@ -818,17 +916,20 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                         Customize Ingredients
                       </h3>
                       <div className="space-y-2 max-h-48 overflow-y-auto">
-                        {selectedItem.ingredients.map((ingredient) => (
+                        {selectedItem.ingredients.map(ingredient => (
                           <div
                             key={ingredient.id}
                             className="flex items-center justify-between p-3 border border-border rounded-lg"
                           >
                             <div className="flex items-center space-x-3">
                               <button
-                                onClick={() => handleIngredientToggle(ingredient.id)}
+                                onClick={() =>
+                                  handleIngredientToggle(ingredient.id)
+                                }
                                 className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-smooth ${
                                   selectedIngredients[ingredient.id]
-                                    ? 'border-primary bg-primary' :'border-border'
+                                    ? 'border-primary bg-primary'
+                                    : 'border-border'
                                 }`}
                               >
                                 {selectedIngredients[ingredient.id] && (
@@ -840,8 +941,11 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                               </span>
                             </div>
                             <span className="font-body font-body-medium text-text-primary">
-                              {ingredient.price > 0 ? `+$${ingredient.price.toFixed(2)}` : 
-                               ingredient.price < 0 ? `-$${Math.abs(ingredient.price).toFixed(2)}` : 'Free'}
+                              {ingredient.price > 0
+                                ? `+$${ingredient.price.toFixed(2)}`
+                                : ingredient.price < 0
+                                  ? `-$${Math.abs(ingredient.price).toFixed(2)}`
+                                  : 'Free'}
                             </span>
                           </div>
                         ))}
@@ -855,7 +959,7 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                       </h3>
                       <textarea
                         value={specialInstructions}
-                        onChange={(e) => setSpecialInstructions(e.target.value)}
+                        onChange={e => setSpecialInstructions(e.target.value)}
                         placeholder="Any special requests or dietary requirements..."
                         className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth font-body resize-none"
                         rows={3}
@@ -899,7 +1003,9 @@ Our dough is prepared fresh daily using traditional techniques and aged for 24 h
                       className="flex-1 flex items-center justify-center space-x-2 px-8 py-4 bg-primary text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-smooth font-body font-body-medium text-lg"
                     >
                       <Icon name="ShoppingCart" size={24} />
-                      <span>Add to Cart • ${calculateTotalPrice().toFixed(2)}</span>
+                      <span>
+                        Add to Cart • ${calculateTotalPrice().toFixed(2)}
+                      </span>
                     </button>
                   </div>
                 </div>

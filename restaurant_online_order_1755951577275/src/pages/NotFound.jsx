@@ -15,7 +15,9 @@ function NotFound() {
 
         {/* 404 Illustration */}
         <div className="mb-8">
-          <div className="text-8xl font-heading font-heading-bold text-primary mb-4">404</div>
+          <div className="text-8xl font-heading font-heading-bold text-primary mb-4">
+            404
+          </div>
           <div className="w-32 h-32 mx-auto bg-primary-50 rounded-full flex items-center justify-center mb-6">
             <Icon name="Search" size={48} className="text-primary" />
           </div>
@@ -27,7 +29,8 @@ function NotFound() {
             Page Not Found
           </h1>
           <p className="text-text-secondary font-body mb-6">
-            Sorry, we couldn't find the page you're looking for. The page might have been moved, deleted, or you entered the wrong URL.
+            Sorry, we couldn't find the page you're looking for. The page might
+            have been moved, deleted, or you entered the wrong URL.
           </p>
         </div>
 
@@ -40,7 +43,7 @@ function NotFound() {
             <Icon name="Home" size={20} />
             <span>Go to Menu</span>
           </Link>
-          
+
           <button
             onClick={() => window.history.back()}
             className="w-full flex items-center justify-center space-x-2 px-6 py-3 border border-border text-text-secondary hover:text-primary hover:border-primary rounded-lg transition-smooth font-body font-body-medium"

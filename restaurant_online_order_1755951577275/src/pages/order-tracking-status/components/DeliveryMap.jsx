@@ -15,7 +15,7 @@ function DeliveryMap({ order, driver }) {
     return arrivalTime.toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: true
+      hour12: true,
     });
   };
 
@@ -36,7 +36,7 @@ function DeliveryMap({ order, driver }) {
             </div>
           )}
         </div>
-        
+
         {order.status === 'out_for_delivery' && (
           <p className="text-sm text-text-secondary font-body mt-2">
             Estimated arrival: {getEstimatedArrival()}
@@ -65,8 +65,12 @@ function DeliveryMap({ order, driver }) {
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-primary rounded-full"></div>
                 <div>
-                  <p className="font-body font-body-medium text-text-primary">Restaurant</p>
-                  <p className="text-text-secondary font-body">{order.restaurant.name}</p>
+                  <p className="font-body font-body-medium text-text-primary">
+                    Restaurant
+                  </p>
+                  <p className="text-text-secondary font-body">
+                    {order.restaurant.name}
+                  </p>
                 </div>
               </div>
 
@@ -75,8 +79,12 @@ function DeliveryMap({ order, driver }) {
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-success rounded-full animate-pulse"></div>
                   <div>
-                    <p className="font-body font-body-medium text-text-primary">Driver</p>
-                    <p className="text-text-secondary font-body">{driver.name}</p>
+                    <p className="font-body font-body-medium text-text-primary">
+                      Driver
+                    </p>
+                    <p className="text-text-secondary font-body">
+                      {driver.name}
+                    </p>
                   </div>
                 </div>
               )}
@@ -85,8 +93,12 @@ function DeliveryMap({ order, driver }) {
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-accent rounded-full"></div>
                 <div>
-                  <p className="font-body font-body-medium text-text-primary">Your Location</p>
-                  <p className="text-text-secondary font-body">Delivery Address</p>
+                  <p className="font-body font-body-medium text-text-primary">
+                    Your Location
+                  </p>
+                  <p className="text-text-secondary font-body">
+                    Delivery Address
+                  </p>
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
     confirmPassword: '',
     firstName: '',
     lastName: '',
-    phone: ''
+    phone: '',
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -23,23 +23,23 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
         confirmPassword: '',
         firstName: '',
         lastName: '',
-        phone: ''
+        phone: '',
       });
       setErrors({});
     }
   }, [isOpen, defaultMode]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: ''
+        [name]: '',
       }));
     }
   };
@@ -77,19 +77,19 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       // Handle successful authentication
       console.log(`${mode} successful:`, formData);
       onClose();
@@ -100,7 +100,7 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
     }
   };
 
-  const handleSocialLogin = (provider) => {
+  const handleSocialLogin = provider => {
     console.log(`${provider} login clicked`);
     // Handle social login
   };
@@ -115,7 +115,7 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
   return (
     <div className="fixed inset-0 z-modal flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
+      <div
         className="fixed inset-0 bg-secondary-900 bg-opacity-50 transition-modal"
         onClick={onClose}
       ></div>
@@ -129,8 +129,9 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
               {mode === 'login' ? 'Welcome Back' : 'Create Account'}
             </h2>
             <p className="text-sm text-text-secondary font-body mt-1">
-              {mode === 'login' ?'Sign in to your account to continue' :'Join TasteBite and start ordering'
-              }
+              {mode === 'login'
+                ? 'Sign in to your account to continue'
+                : 'Join TasteBite and start ordering'}
             </p>
           </div>
           <button
@@ -192,7 +193,9 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
                     placeholder="John"
                   />
                   {errors.firstName && (
-                    <p className="text-error text-sm font-body mt-1">{errors.firstName}</p>
+                    <p className="text-error text-sm font-body mt-1">
+                      {errors.firstName}
+                    </p>
                   )}
                 </div>
                 <div>
@@ -210,7 +213,9 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
                     placeholder="Doe"
                   />
                   {errors.lastName && (
-                    <p className="text-error text-sm font-body mt-1">{errors.lastName}</p>
+                    <p className="text-error text-sm font-body mt-1">
+                      {errors.lastName}
+                    </p>
                   )}
                 </div>
               </div>
@@ -231,7 +236,9 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
                 placeholder="john@example.com"
               />
               {errors.email && (
-                <p className="text-error text-sm font-body mt-1">{errors.email}</p>
+                <p className="text-error text-sm font-body mt-1">
+                  {errors.email}
+                </p>
               )}
             </div>
 
@@ -250,7 +257,9 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
                 placeholder="••••••••"
               />
               {errors.password && (
-                <p className="text-error text-sm font-body mt-1">{errors.password}</p>
+                <p className="text-error text-sm font-body mt-1">
+                  {errors.password}
+                </p>
               )}
             </div>
 
@@ -270,7 +279,9 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
                   placeholder="••••••••"
                 />
                 {errors.confirmPassword && (
-                  <p className="text-error text-sm font-body mt-1">{errors.confirmPassword}</p>
+                  <p className="text-error text-sm font-body mt-1">
+                    {errors.confirmPassword}
+                  </p>
                 )}
               </div>
             )}
@@ -286,12 +297,15 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
               disabled={isLoading}
               className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-smooth font-body font-body-medium"
             >
-              {isLoading && <Icon name="Loader2" size={20} className="animate-spin" />}
+              {isLoading && (
+                <Icon name="Loader2" size={20} className="animate-spin" />
+              )}
               <span>
-                {isLoading 
-                  ? 'Please wait...' 
-                  : mode === 'login' ?'Sign In' :'Create Account'
-                }
+                {isLoading
+                  ? 'Please wait...'
+                  : mode === 'login'
+                    ? 'Sign In'
+                    : 'Create Account'}
               </span>
             </button>
           </form>
@@ -299,7 +313,9 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
           {/* Footer */}
           <div className="mt-6 text-center">
             <p className="text-sm text-text-secondary font-body">
-              {mode === 'login' ? "Don't have an account? " : "Already have an account? "}
+              {mode === 'login'
+                ? "Don't have an account? "
+                : 'Already have an account? '}
               <button
                 onClick={switchMode}
                 className="text-primary hover:text-primary-700 font-body-medium transition-smooth"
@@ -307,7 +323,7 @@ function AuthenticationModal({ isOpen, onClose, defaultMode = 'login' }) {
                 {mode === 'login' ? 'Sign up' : 'Sign in'}
               </button>
             </p>
-            
+
             {mode === 'login' && (
               <button className="text-sm text-primary hover:text-primary-700 font-body-medium transition-smooth mt-2">
                 Forgot your password?

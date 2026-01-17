@@ -11,7 +11,7 @@ function OrderActions({ order, onReorder, onContactSupport, onRateOrder }) {
   };
 
   const confirmCancelOrder = () => {
-    console.log("Order cancelled");
+    console.log('Order cancelled');
     setShowCancelModal(false);
   };
 
@@ -20,17 +20,21 @@ function OrderActions({ order, onReorder, onContactSupport, onRateOrder }) {
       navigator.share({
         title: `Order ${order.id} - TasteBite`,
         text: `Track my order from ${order.restaurant.name}`,
-        url: window.location.href
+        url: window.location.href,
       });
     } else {
       // Fallback for browsers that don't support Web Share API
       navigator.clipboard.writeText(window.location.href);
-      console.log("Order link copied to clipboard");
+      console.log('Order link copied to clipboard');
     }
   };
 
-  const canModifyOrder = order.canModify && (order.status === 'confirmed' || order.status === 'preparing');
-  const canCancelOrder = order.canCancel && (order.status === 'confirmed' || order.status === 'preparing');
+  const canModifyOrder =
+    order.canModify &&
+    (order.status === 'confirmed' || order.status === 'preparing');
+  const canCancelOrder =
+    order.canCancel &&
+    (order.status === 'confirmed' || order.status === 'preparing');
   const canRateOrder = order.status === 'delivered';
 
   return (
@@ -104,7 +108,9 @@ function OrderActions({ order, onReorder, onContactSupport, onRateOrder }) {
 
         {/* Quick Links */}
         <div className="mt-6 pt-4 border-t border-border">
-          <p className="text-sm text-text-secondary font-body mb-3">Quick Links</p>
+          <p className="text-sm text-text-secondary font-body mb-3">
+            Quick Links
+          </p>
           <div className="grid grid-cols-2 gap-3">
             <Link
               to="/menu-browse-search"
@@ -127,7 +133,10 @@ function OrderActions({ order, onReorder, onContactSupport, onRateOrder }) {
       {/* Cancel Order Modal */}
       {showCancelModal && (
         <div className="fixed inset-0 z-modal flex items-center justify-center p-4">
-          <div className="fixed inset-0 bg-secondary-900 bg-opacity-50" onClick={() => setShowCancelModal(false)}></div>
+          <div
+            className="fixed inset-0 bg-secondary-900 bg-opacity-50"
+            onClick={() => setShowCancelModal(false)}
+          ></div>
           <div className="relative bg-surface rounded-2xl shadow-floating max-w-md w-full p-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-error-50 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -137,7 +146,8 @@ function OrderActions({ order, onReorder, onContactSupport, onRateOrder }) {
                 Cancel Order?
               </h3>
               <p className="text-text-secondary font-body mb-6">
-                Are you sure you want to cancel this order? This action cannot be undone.
+                Are you sure you want to cancel this order? This action cannot
+                be undone.
               </p>
               <div className="flex space-x-3">
                 <button
@@ -161,7 +171,10 @@ function OrderActions({ order, onReorder, onContactSupport, onRateOrder }) {
       {/* Rating Modal */}
       {showRatingModal && (
         <div className="fixed inset-0 z-modal flex items-center justify-center p-4">
-          <div className="fixed inset-0 bg-secondary-900 bg-opacity-50" onClick={() => setShowRatingModal(false)}></div>
+          <div
+            className="fixed inset-0 bg-secondary-900 bg-opacity-50"
+            onClick={() => setShowRatingModal(false)}
+          ></div>
           <div className="relative bg-surface rounded-2xl shadow-floating max-w-md w-full p-6">
             <div className="text-center">
               <h3 className="text-xl font-heading font-heading-medium text-text-primary mb-4">
@@ -170,10 +183,10 @@ function OrderActions({ order, onReorder, onContactSupport, onRateOrder }) {
               <p className="text-text-secondary font-body mb-6">
                 How was your experience with {order.restaurant.name}?
               </p>
-              
+
               {/* Star Rating */}
               <div className="flex justify-center space-x-2 mb-6">
-                {[1, 2, 3, 4, 5].map((star) => (
+                {[1, 2, 3, 4, 5].map(star => (
                   <button
                     key={star}
                     className="p-1 text-warning hover:scale-110 transition-transform"

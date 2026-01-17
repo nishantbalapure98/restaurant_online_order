@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 import Icon from 'components/AppIcon';
 
 function CustomerSatisfaction() {
@@ -14,7 +22,7 @@ function CustomerSatisfaction() {
       { date: '2023-05-04', rating: 4.5 },
       { date: '2023-05-05', rating: 4.8 },
       { date: '2023-05-06', rating: 4.7 },
-      { date: '2023-05-07', rating: 4.9 }
+      { date: '2023-05-07', rating: 4.9 },
     ],
     food: [
       { date: '2023-05-01', rating: 4.7 },
@@ -23,7 +31,7 @@ function CustomerSatisfaction() {
       { date: '2023-05-04', rating: 4.7 },
       { date: '2023-05-05', rating: 4.9 },
       { date: '2023-05-06', rating: 4.8 },
-      { date: '2023-05-07', rating: 5.0 }
+      { date: '2023-05-07', rating: 5.0 },
     ],
     service: [
       { date: '2023-05-01', rating: 4.3 },
@@ -32,7 +40,7 @@ function CustomerSatisfaction() {
       { date: '2023-05-04', rating: 4.3 },
       { date: '2023-05-05', rating: 4.7 },
       { date: '2023-05-06', rating: 4.6 },
-      { date: '2023-05-07', rating: 4.8 }
+      { date: '2023-05-07', rating: 4.8 },
     ],
     delivery: [
       { date: '2023-05-01', rating: 4.2 },
@@ -41,8 +49,8 @@ function CustomerSatisfaction() {
       { date: '2023-05-04', rating: 4.1 },
       { date: '2023-05-05', rating: 4.5 },
       { date: '2023-05-06', rating: 4.4 },
-      { date: '2023-05-07', rating: 4.6 }
-    ]
+      { date: '2023-05-07', rating: 4.6 },
+    ],
   };
 
   // Mock feedback data
@@ -51,27 +59,29 @@ function CustomerSatisfaction() {
       id: 1,
       customer: 'Sarah M.',
       rating: 5,
-      comment: 'The food was amazing and delivery was right on time. Will definitely order again!',
-      date: '2023-05-07'
+      comment:
+        'The food was amazing and delivery was right on time. Will definitely order again!',
+      date: '2023-05-07',
     },
     {
       id: 2,
       customer: 'Michael T.',
       rating: 4,
       comment: 'Great food but the delivery took a bit longer than expected.',
-      date: '2023-05-06'
+      date: '2023-05-06',
     },
     {
       id: 3,
       customer: 'Jessica L.',
       rating: 5,
-      comment: 'Best pasta I\'ve had in a long time. The packaging was also excellent.',
-      date: '2023-05-05'
-    }
+      comment:
+        "Best pasta I've had in a long time. The packaging was also excellent.",
+      date: '2023-05-05',
+    },
   ];
 
   // Format date for display
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
@@ -85,7 +95,8 @@ function CustomerSatisfaction() {
             {formatDate(label)}
           </p>
           <p className="text-sm font-body">
-            <span className="text-primary font-body-medium">Rating:</span> {payload[0].value.toFixed(1)}/5.0
+            <span className="text-primary font-body-medium">Rating:</span>{' '}
+            {payload[0].value.toFixed(1)}/5.0
           </p>
         </div>
       );
@@ -94,23 +105,23 @@ function CustomerSatisfaction() {
   };
 
   // Get metric display name
-  const getMetricName = (metric) => {
+  const getMetricName = metric => {
     const metricNames = {
       overall: 'Overall Satisfaction',
       food: 'Food Quality',
       service: 'Service Quality',
-      delivery: 'Delivery Experience'
+      delivery: 'Delivery Experience',
     };
     return metricNames[metric] || 'Satisfaction';
   };
 
   // Get line color based on metric
-  const getLineColor = (metric) => {
+  const getLineColor = metric => {
     const colorMap = {
       overall: 'var(--color-primary)',
       food: 'var(--color-success)',
       service: 'var(--color-accent)',
-      delivery: 'var(--color-secondary)'
+      delivery: 'var(--color-secondary)',
     };
     return colorMap[metric] || 'var(--color-primary)';
   };
@@ -126,15 +137,16 @@ function CustomerSatisfaction() {
             Tracking customer experience metrics
           </p>
         </div>
-        
+
         <div className="mt-3 sm:mt-0 flex items-center space-x-2 bg-surface rounded-lg border border-border p-1">
-          {Object.keys(satisfactionData).map((metric) => (
+          {Object.keys(satisfactionData).map(metric => (
             <button
               key={metric}
               onClick={() => setSelectedMetric(metric)}
               className={`px-3 py-1.5 text-xs font-body font-body-medium rounded-md transition-smooth ${
                 selectedMetric === metric
-                  ? 'bg-primary text-white' :'text-text-secondary hover:bg-primary-50 hover:text-primary'
+                  ? 'bg-primary text-white'
+                  : 'text-text-secondary hover:bg-primary-50 hover:text-primary'
               }`}
             >
               {metric.charAt(0).toUpperCase() + metric.slice(1)}
@@ -146,30 +158,36 @@ function CustomerSatisfaction() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Satisfaction Chart */}
         <div className="lg:col-span-2">
-          <div className="h-64" aria-label={`${getMetricName(selectedMetric)} Chart`}>
+          <div
+            className="h-64"
+            aria-label={`${getMetricName(selectedMetric)} Chart`}
+          >
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={satisfactionData[selectedMetric]}
                 margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                <XAxis 
-                  dataKey="date" 
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="var(--color-border)"
+                />
+                <XAxis
+                  dataKey="date"
                   tickFormatter={formatDate}
                   stroke="var(--color-text-secondary)"
                   tick={{ fontSize: 12 }}
                 />
-                <YAxis 
-                  domain={[3, 5]} 
+                <YAxis
+                  domain={[3, 5]}
                   ticks={[3, 3.5, 4, 4.5, 5]}
                   stroke="var(--color-text-secondary)"
                   tick={{ fontSize: 12 }}
                 />
                 <Tooltip content={<CustomTooltip />} />
-                <Line 
-                  type="monotone" 
-                  dataKey="rating" 
-                  stroke={getLineColor(selectedMetric)} 
+                <Line
+                  type="monotone"
+                  dataKey="rating"
+                  stroke={getLineColor(selectedMetric)}
                   strokeWidth={2}
                   dot={{ r: 4, fill: getLineColor(selectedMetric) }}
                   activeDot={{ r: 6 }}
@@ -180,23 +198,32 @@ function CustomerSatisfaction() {
 
           {/* Metrics Summary */}
           <div className="grid grid-cols-4 gap-4 mt-4">
-            <MetricCard 
-              title="Average" 
-              value={(satisfactionData[selectedMetric].reduce((sum, item) => sum + item.rating, 0) / satisfactionData[selectedMetric].length).toFixed(1)}
+            <MetricCard
+              title="Average"
+              value={(
+                satisfactionData[selectedMetric].reduce(
+                  (sum, item) => sum + item.rating,
+                  0
+                ) / satisfactionData[selectedMetric].length
+              ).toFixed(1)}
               icon="Star"
             />
-            <MetricCard 
-              title="Highest" 
-              value={Math.max(...satisfactionData[selectedMetric].map(item => item.rating)).toFixed(1)}
+            <MetricCard
+              title="Highest"
+              value={Math.max(
+                ...satisfactionData[selectedMetric].map(item => item.rating)
+              ).toFixed(1)}
               icon="TrendingUp"
             />
-            <MetricCard 
-              title="Lowest" 
-              value={Math.min(...satisfactionData[selectedMetric].map(item => item.rating)).toFixed(1)}
+            <MetricCard
+              title="Lowest"
+              value={Math.min(
+                ...satisfactionData[selectedMetric].map(item => item.rating)
+              ).toFixed(1)}
               icon="TrendingDown"
             />
-            <MetricCard 
-              title="Reviews" 
+            <MetricCard
+              title="Reviews"
               value={satisfactionData[selectedMetric].length}
               icon="MessageSquare"
             />
@@ -208,16 +235,18 @@ function CustomerSatisfaction() {
           <h3 className="text-lg font-heading font-heading-medium text-text-primary mb-3">
             Recent Feedback
           </h3>
-          
+
           <div className="space-y-4">
-            {recentFeedback.map((feedback) => (
+            {recentFeedback.map(feedback => (
               <div key={feedback.id} className="p-3 bg-secondary-50 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-body font-body-medium text-text-primary">
                     {feedback.customer}
                   </span>
                   <div className="flex items-center">
-                    <span className="text-sm font-body mr-1">{feedback.rating}</span>
+                    <span className="text-sm font-body mr-1">
+                      {feedback.rating}
+                    </span>
                     <Icon name="Star" size={14} className="text-warning" />
                   </div>
                 </div>
@@ -248,7 +277,9 @@ function MetricCard({ title, value, icon }) {
       <p className="text-text-secondary font-body text-xs mb-1">{title}</p>
       <div className="flex items-center justify-center">
         <Icon name={icon} size={16} className="text-primary mr-1" />
-        <span className="text-lg font-heading font-heading-medium text-text-primary">{value}</span>
+        <span className="text-lg font-heading font-heading-medium text-text-primary">
+          {value}
+        </span>
       </div>
     </div>
   );

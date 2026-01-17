@@ -8,7 +8,7 @@ function DriverDetails({ driver }) {
   };
 
   const handleMessageDriver = () => {
-    console.log("Opening message interface with driver");
+    console.log('Opening message interface with driver');
   };
 
   return (
@@ -38,7 +38,11 @@ function DriverDetails({ driver }) {
               </h4>
               <div className="flex items-center space-x-2 mt-1">
                 <div className="flex items-center space-x-1">
-                  <Icon name="Star" size={16} className="text-warning fill-current" />
+                  <Icon
+                    name="Star"
+                    size={16}
+                    className="text-warning fill-current"
+                  />
                   <span className="text-sm font-body font-body-medium text-text-primary">
                     {driver.rating}
                   </span>
@@ -48,7 +52,7 @@ function DriverDetails({ driver }) {
                 </span>
               </div>
             </div>
-            
+
             {/* Status Badge */}
             <div className="flex items-center space-x-2 px-3 py-1 bg-success-50 rounded-full">
               <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
@@ -67,7 +71,7 @@ function DriverDetails({ driver }) {
               <Icon name="Phone" size={18} />
               <span>Call</span>
             </button>
-            
+
             <button
               onClick={handleMessageDriver}
               className="flex items-center space-x-2 px-4 py-2 border border-border text-text-secondary hover:text-primary hover:border-primary rounded-lg transition-smooth font-body font-body-medium"
@@ -86,25 +90,19 @@ function DriverDetails({ driver }) {
             <p className="text-lg font-heading font-heading-medium text-text-primary">
               1,247
             </p>
-            <p className="text-sm text-text-secondary font-body">
-              Deliveries
-            </p>
+            <p className="text-sm text-text-secondary font-body">Deliveries</p>
           </div>
           <div>
             <p className="text-lg font-heading font-heading-medium text-text-primary">
               98%
             </p>
-            <p className="text-sm text-text-secondary font-body">
-              On Time
-            </p>
+            <p className="text-sm text-text-secondary font-body">On Time</p>
           </div>
           <div>
             <p className="text-lg font-heading font-heading-medium text-text-primary">
               4.8
             </p>
-            <p className="text-sm text-text-secondary font-body">
-              Rating
-            </p>
+            <p className="text-sm text-text-secondary font-body">Rating</p>
           </div>
         </div>
       </div>
